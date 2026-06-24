@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GAMARAY — Bespoke Automotive Atelier · San Antonio, Texas</title>
+<meta name="description" content="GAMARAY is a bespoke automotive atelier in San Antonio, Texas. Forged wheels, custom exhaust systems, and precision modifications for the world's finest European machines.">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Montserrat:wght@200;300;400;500;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Montserrat:wght@200;300;400;500;600&display=swap" media="print" onload="this.media='all'">
+<link rel="stylesheet" href="css/gamaray.css?v=10">
+<style>
+  .gmr-philosophy-section::before,
+  .gmr-philosophy-section::after { display: none; }
+</style>
+</head>
+<body>
+
+<!-- ── PAGE LOADER ── -->
+<div id="gmr-loader">
+  <div class="loader-wordmark"><img src="img/logo.png" alt="GAMARAY"></div>
+</div>
+
+<!-- ── CURSOR ── -->
+<div id="gmr-cursor"></div>
+
+<!-- ── SCROLL PROGRESS ── -->
+<div id="gmr-progress"></div>
+
+<!-- ── NAVIGATION ── -->
+<nav id="gmr-nav">
+  <button class="gmr-hamburger" id="gmr-hamburger" aria-label="Open menu"><span></span><span></span></button>
+  <a href="index.html" class="gmr-nav-logo"><img src="img/logo.png" alt="GAMARAY"></a>
+  <a href="begin.html" class="gmr-nav-cta">Begin</a>
+</nav>
+
+<!-- ── MOBILE MENU ── -->
+<div id="gmr-nav-backdrop"></div>
+<div id="gmr-mobile-menu">
+  <button class="gmr-menu-close" id="gmr-menu-close">✕</button>
+  <a href="the-work.html">The Work</a>
+  <a href="the-house.html">The House</a>
+  <a href="the-atelier.html">The Atelier</a>
+  <a href="warranty.html">Warranty</a>
+  <a href="exchange.html">The Exchange</a>
+  <a href="begin.html">Begin</a>
+</div>
+
+<!-- ══════════════════════════════════════════════════════
+     SECTION 1 — HERO
+════════════════════════════════════════════════════════ -->
+<section class="gmr-hero">
+  <div class="gmr-hero-bg">
+    <video autoplay loop muted playsinline>
+      <source src="https://pub-9fed0892d72f46c8ace5f8382cff40e8.r2.dev/Videos/zenthrium-intro.mp4" type="video/mp4">
+    </video>
+  </div>
+  <div class="gmr-hero-grad"></div>
+
+  <div class="gmr-hero-content">
+    <div class="gmr-hero-eyebrow">GAMARAY · San Antonio, Texas</div>
+    <h1 class="gmr-hero-title">
+      Bespoke by Nature.<br><em>Driven by Soul.</em>
+    </h1>
+    <a href="begin.html" class="gmr-hero-cta">Begin Your Commission</a>
+  </div>
+
+  <div class="gmr-scroll-cue">
+    <span>Scroll</span>
+    <div class="gmr-scroll-line"></div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════
+     SECTION 2 — SCROLL-DRIVEN 360 WHEEL ROTATION
+     (Bugatti scroll-hijacked interaction)
+════════════════════════════════════════════════════════ -->
+<section id="gmr-wheel-zone" class="gmr-wheel-zone">
+  <div class="gmr-wheel-sticky">
+
+    <span class="wheel-side-label left">GAMARAY Signature Wheels</span>
+    <span class="wheel-side-label right">Cast in Intention</span>
+
+    <div class="wheel-section-label">
+      <span class="wheel-eyebrow">Signature Series · 2026</span>
+      <div class="wheel-title">The Wheel as Object</div>
+    </div>
+
+    <div class="wheel-wrap">
+      <!-- Progress arc -->
+      <svg id="gmr-progress-ring" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+        <circle id="gmr-arc-track" cx="100" cy="100" r="96"/>
+        <circle id="gmr-arc-fill"  cx="100" cy="100" r="96" transform="rotate(-90 100 100)"/>
+      </svg>
+
+      <img id="gmr-wheel-svg" src="img/wheel-nobg.png" alt="GAMARAY Signature Wheel" loading="lazy" decoding="async">
+
+      <div class="wheel-angle" id="gmr-wheel-angle">0° · Scroll to rotate</div>
+    </div>
+
+    <div class="wheel-reveal" id="gmr-wheel-reveal">
+      <p>"Not borrowed. Not licensed. Born here."</p>
+      <a href="the-work.html#signature-wheels">Commission Yours →</a>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════
+     SECTION 3 — ATELIER VIDEO (scroll-triggered)
+════════════════════════════════════════════════════════ -->
+<section class="gmr-video-section">
+  <div class="gmr-video-bg">
+    <video autoplay loop muted playsinline><source src="https://pub-9fed0892d72f46c8ace5f8382cff40e8.r2.dev/Videos/Revlueto%20home%20page%20video.mp4" type="video/mp4"></video>
+  </div>
+  <div class="gmr-video-grad"></div>
+
+  <button class="gmr-sound-toggle" data-sound-toggle="atelier-video" aria-label="Toggle sound">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+      <path d="M11 5L6 9H2v6h4l5 4V5z"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"/>
+    </svg>
+    <span class="sound-label">Listen</span>
+  </button>
+
+  <div class="gmr-video-content reveal">
+    <span class="gmr-eyebrow">San Antonio, Texas</span>
+    <h2 class="gmr-heading" style="font-size:clamp(32px,5vw,60px)">A Different Kind<br>of House.</h2>
+    <div class="gmr-rule"></div>
+    <p class="gmr-body">We are a house of bespoke automotive design, not a shop, not a modifier. An atelier. A place where the rarest marques and models are treated with the reverence they deserve, and where every commission begins with a conversation.</p>
+    <a href="the-house.html" class="btn-gold" style="margin-top:2rem;display:inline-block">The House of GAMARAY →</a>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════
+     SECTION 4 — PRODUCTS ROW
+════════════════════════════════════════════════════════ -->
+<section class="gmr-section gmr-section-black">
+  <div class="reveal">
+    <span class="gmr-eyebrow">Exclusively Ours.</span>
+    <h2 class="gmr-heading">The Work.</h2>
+    <p class="gmr-body">There is no catalogue. No off-the-shelf. Each design originates in our studio, and exists nowhere else in the world.</p>
+  </div>
+
+  <div class="gmr-products-grid" style="grid-template-columns:repeat(2,1fr)">
+
+    <div class="gmr-product-card">
+      <div class="gmr-product-card-bg" style="background-image:url('media/wheels-card.jpg')"></div>
+      <div class="gmr-product-card-content">
+        <span class="gmr-product-tag">Signature Wheels</span>
+        <div class="gmr-product-name">GAMARAY<br>Signature Wheels</div>
+        <p class="gmr-product-desc">Not borrowed. Not licensed. Born here. Every design in the Signature Catalog is drawn and developed in our studio, from the geometry of each spoke to the character of each finish. Original GAMARAY designs, created for those who recognize the difference.</p>
+        <a href="the-work.html#signature-wheels" class="gmr-product-link">View the Collection →</a>
+      </div>
+    </div>
+
+    <div class="gmr-product-card">
+      <div class="gmr-product-card-bg" style="background-image:url('https://pub-9fed0892d72f46c8ace5f8382cff40e8.r2.dev/Photos/Gold%20bolts%20wheel.jpg')"></div>
+      <div class="gmr-product-card-content">
+        <span class="gmr-product-tag">Full Commission</span>
+        <div class="gmr-product-name">Bespoke<br>Wheels</div>
+        <p class="gmr-product-desc">Not a collection you choose from. A wheel we design with you, from nothing. One client. One set. We sit together, materials in hand, and begin from first principles. Drawn, engineered, and forged entirely around your car and your vision.</p>
+        <a href="the-work.html#bespoke-wheels" class="gmr-product-link">Begin a Commission →</a>
+      </div>
+    </div>
+
+    <div class="gmr-product-card">
+      <div class="gmr-product-card-bg" style="background-image:url('media/exhaust-card.jpg')"></div>
+      <div class="gmr-product-card-content">
+        <span class="gmr-product-tag">Bespoke Exhaust</span>
+        <div class="gmr-product-name">Custom<br>Exhaust Systems</div>
+        <p class="gmr-product-desc">The voice is part of the character. Titanium. Stainless Steel. Each alloy sings differently. In our atelier you can hear them, a listening experience before the commission. We engineer for flow, for power, for a tone that is unmistakably yours.</p>
+        <a href="the-work.html#exhaust" class="gmr-product-link">Commission Yours →</a>
+      </div>
+    </div>
+
+    <div class="gmr-product-card">
+      <div class="gmr-product-card-bg" style="background-image:url('media/refinements-card.jpg')"></div>
+      <div class="gmr-product-card-content">
+        <span class="gmr-product-tag">For Clients In Our World</span>
+        <div class="gmr-product-name">Tailored<br>Refinements</div>
+        <p class="gmr-product-desc">Some things are only shared across the table.</p>
+        <a href="begin.html" class="gmr-product-link">Speak With Us →</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════
+     SECTION 5 + 6 — CLOCK IMAGE WRAPPER
+════════════════════════════════════════════════════════ -->
+<div style="position:relative;overflow:hidden">
+
+  <!-- Shared background clock image spanning both sections -->
+  <img src="https://pub-9fed0892d72f46c8ace5f8382cff40e8.r2.dev/Photos/Red%20Clock%20(1).png" alt="" aria-hidden="true" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;opacity:.82;pointer-events:none;z-index:0">
+
+  <!-- SECTION 5 — SECOND VIDEO (Porsche at speed) -->
+  <section class="gmr-video-section" style="align-items:center;justify-content:center;position:relative;z-index:1;background:transparent">
+    <div class="gmr-video-content reveal" style="text-align:center;margin:0 auto">
+      <p style="font-family:var(--serif);font-size:clamp(20px,3.5vw,40px);font-style:italic;color:var(--t1);line-height:1.5">
+        "Every detail is meticulously crafted."
+      </p>
+      <div class="gmr-rule gmr-rule-center" style="margin-top:2rem"></div>
+      <span style="font-size:9px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);margin-top:1.5rem;display:block">GAMARAY · San Antonio, Texas</span>
+    </div>
+  </section>
+
+  <!-- SECTION 6 — PHILOSOPHY -->
+  <div class="gmr-philosophy-section" style="background:transparent;position:relative;z-index:1">
+    <div class="corner-mark tl"></div>
+    <div class="corner-mark tr"></div>
+    <div class="corner-mark bl"></div>
+    <div class="corner-mark br"></div>
+
+    <div class="reveal" style="position:relative;z-index:1">
+      <span class="gmr-eyebrow" style="margin-bottom:2rem">What We Believe</span>
+      <p class="gmr-philosophy-quote">
+        "We serve people who see the automobile differently, not as transportation, not as status, but as the most personal object they own."
+      </p>
+      <div class="gmr-rule gmr-rule-center"></div>
+      <p style="font-size:12px;color:var(--t4);letter-spacing:.12em;text-transform:uppercase;margin-bottom:2.5rem">Precision. Silence. Identity.</p>
+      <a href="the-house.html" class="btn-gold">The House of GAMARAY →</a>
+    </div>
+  </div>
+
+</div>
+
+<!-- ══════════════════════════════════════════════════════
+     TRUST STRIP
+════════════════════════════════════════════════════════ -->
+<div class="gmr-trust-strip">
+  <div class="gmr-trust-item">
+    <span class="gmr-trust-dot"></span>
+    Handcrafted in Texas
+  </div>
+  <div class="gmr-trust-item">
+    <span class="gmr-trust-dot"></span>
+    Direct Fitment Guarantee
+  </div>
+  <div class="gmr-trust-item">
+    <span class="gmr-trust-dot"></span>
+    Provenance Warranty
+  </div>
+  <div class="gmr-trust-item">
+    <span class="gmr-trust-dot"></span>
+    Every Build Is Unique
+  </div>
+  <div class="gmr-trust-item">
+    <span class="gmr-trust-dot"></span>
+    By Appointment Only
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════
+     FOOTER
+════════════════════════════════════════════════════════ -->
+<footer id="gmr-footer">
+  <div class="gmr-footer-grid">
+    <div>
+      <a href="index.html" class="gmr-footer-logo"><img src="img/logo.png" alt="GAMARAY" loading="lazy" decoding="async"></a>
+      <p class="gmr-footer-tagline">Designed in Texas. Felt Everywhere.<br>By appointment only.</p>
+    </div>
+    <div>
+      <span class="gmr-footer-heading">Navigation</span>
+      <ul class="gmr-footer-links">
+        <li><a href="the-work.html">The Work</a></li>
+        <li><a href="the-house.html">The House</a></li>
+        <li><a href="the-atelier.html">The Atelier</a></li>
+        <li><a href="begin.html">Begin</a></li>
+      </ul>
+    </div>
+    <div>
+      <span class="gmr-footer-heading">Programs</span>
+      <ul class="gmr-footer-links">
+        <li><a href="warranty.html">Provenance Warranty</a></li>
+        <li><a href="exchange.html">The Exchange</a></li>
+        <li><a href="the-atelier.html#commission">Atelier Commission</a></li>
+        <li><a href="mailto:info@gamarayperformance.com">info@gamarayperformance.com</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="gmr-footer-bottom">
+    <span>© 2026 GAMARAY · San Antonio, Texas · By Appointment</span>
+    <a href="https://www.instagram.com/gamarayperformance/" target="_blank" rel="noopener" style="color:var(--t4);transition:color .2s" onmouseover="this.style.color='var(--t1)'" onmouseout="this.style.color='var(--t4)'">@gamarayperformance</a>
+  </div>
+</footer>
+
+<script src="js/gamaray.js?v=9"></script>
+</body>
+</html>

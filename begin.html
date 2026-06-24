@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Begin Your Commission — GAMARAY</title>
+<meta name="description" content="Begin your GAMARAY commission. Tell us about your car and your vision. Every project begins with a conversation — signature wheels, bespoke exhaust, and refinements for the world's finest European machines.">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Montserrat:wght@200;300;400;500;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Montserrat:wght@200;300;400;500;600&display=swap" media="print" onload="this.media='all'">
+<link rel="stylesheet" href="css/gamaray.css?v=10">
+<style>
+.gmr-form-section {
+  border: 1px solid var(--b2);
+  margin-bottom: 3rem;
+  position: relative;
+  overflow: hidden;
+}
+.gmr-form-section::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+}
+.gmr-form-section-header {
+  padding: 2.5rem 2.5rem 0;
+}
+.gmr-form-section-body {
+  padding: 2rem 2.5rem 2.5rem;
+}
+.gmr-form-divider {
+  border: none;
+  border-top: 1px solid var(--b1);
+  margin: 1.75rem 0;
+}
+.gmr-checkbox-field {
+  display: flex; align-items: center; gap: 12px;
+  font-size: 12px; color: var(--t3); margin-top: 1.25rem;
+  cursor: pointer;
+}
+.gmr-checkbox-field input[type="checkbox"] {
+  width: 16px; height: 16px;
+  accent-color: var(--gold); cursor: pointer;
+  flex-shrink: 0;
+}
+</style>
+</head>
+<body>
+<div id="gmr-loader"><div class="loader-wordmark"><img src="img/logo.png" alt="GAMARAY"></div></div>
+<div id="gmr-cursor"></div>
+<div id="gmr-progress"></div>
+<nav id="gmr-nav">
+  <button class="gmr-hamburger" id="gmr-hamburger" aria-label="Open menu"><span></span><span></span></button>
+  <a href="index.html" class="gmr-nav-logo"><img src="img/logo.png" alt="GAMARAY"></a>
+  <a href="begin.html" class="gmr-nav-cta active">Begin</a>
+</nav>
+<div id="gmr-nav-backdrop"></div>
+<div id="gmr-mobile-menu">
+  <button class="gmr-menu-close" id="gmr-menu-close">✕</button>
+  <a href="the-work.html">The Work</a>
+  <a href="the-house.html">The House</a>
+  <a href="the-atelier.html">The Atelier</a>
+  <a href="warranty.html">Warranty</a>
+  <a href="exchange.html">The Exchange</a>
+  <a href="begin.html">Begin</a>
+</div>
+
+<div class="gmr-page-hero">
+  <div style="position:absolute;inset:0;background:linear-gradient(135deg,#0A0A08,#14120A)"></div>
+  <div style="position:relative;z-index:1">
+    <span class="gmr-eyebrow">GAMARAY · Commission</span>
+    <h1 class="gmr-heading" style="font-size:clamp(48px,7vw,88px);margin-bottom:.5rem">Begin Your<br><em>Commission.</em></h1>
+    <p style="font-family:var(--serif);font-size:clamp(14px,2vw,20px);font-style:italic;color:var(--t3)">Tell us about your car and your vision. Every project begins here, in your own words.</p>
+  </div>
+</div>
+
+<!-- Disclaimer -->
+<section class="gmr-section gmr-section-s1" style="padding-top:4rem;padding-bottom:4rem">
+  <div class="reveal" style="max-width:640px;margin:0 auto;text-align:center">
+    <p style="font-size:12px;color:var(--t4);font-style:italic;line-height:1.9">Every submission is read personally. We accept only the commissions we can do justice to, not as a limitation, but as a commitment to the work. If we are the right house for you, you will hear from us.</p>
+  </div>
+</section>
+
+<section class="gmr-section gmr-section-black">
+  <div class="gmr-tabs">
+    <div class="gmr-tab-nav">
+      <button class="gmr-tab-btn active" data-tab="wheels">Bespoke Wheels Commission</button>
+      <button class="gmr-tab-btn" data-tab="exhaust-porsche">Porsche 911 Exhaust</button>
+      <button class="gmr-tab-btn" data-tab="exhaust-other">Exhaust — Other Vehicles</button>
+    </div>
+
+    <!-- ── WHEELS FORM ── -->
+    <div class="gmr-tab-panel active" data-tab-panel="wheels">
+      <div class="gmr-form-section reveal">
+        <div class="gmr-form-section-header">
+          <span class="gmr-eyebrow">Bespoke Wheels · Full Commission</span>
+          <h2 class="gmr-heading" style="font-size:clamp(24px,3vw,36px)">Commission Your Wheels.</h2>
+          <p style="font-family:var(--serif);font-size:16px;font-style:italic;color:var(--t3);margin-bottom:1.5rem">Not borrowed. Not licensed. Born here. Every set begins with what you tell us below.</p>
+        </div>
+        <div class="gmr-form-section-body">
+          <form class="gmr-form">
+            <div class="gmr-fields-two">
+              <div class="gmr-field"><label>Your Name</label><input type="text" placeholder="Full name" required></div>
+              <div class="gmr-field"><label>Where We Reach You</label><input type="email" placeholder="Email address" required></div>
+            </div>
+            <div class="gmr-fields-two">
+              <div class="gmr-field"><label>Your Location</label><input type="text" placeholder="City, State or postal code"></div>
+              <div class="gmr-field"><label>How Did You Hear About GAMARAY</label><input type="text" placeholder="Referral, Instagram, event, other"></div>
+            </div>
+            <hr class="gmr-form-divider">
+            <div class="gmr-fields-two">
+              <div class="gmr-field"><label>The Car</label><input type="text" placeholder="e.g. Porsche 911 Carrera, Ferrari SF90" required></div>
+              <div class="gmr-field"><label>Year</label><input type="text" placeholder="e.g. 2023"></div>
+            </div>
+            <div class="gmr-fields-two">
+              <div class="gmr-field"><label>VIN <span style="color:var(--t4);font-style:italic">(optional)</span></label><input type="text" placeholder="Helps us confirm exact fitment"></div>
+              <div class="gmr-field"><label>Wheel Size</label><input type="text" placeholder="e.g. 20&quot;, 21&quot;, 22&quot; or unsure"></div>
+            </div>
+            <div class="gmr-fields-two">
+              <div class="gmr-field"><label>Number of Sets</label><input type="text" placeholder="e.g. 1 set of 4, staggered fitment"></div>
+              <div class="gmr-field"><label>Color of the Car</label><input type="text" placeholder="e.g. Guards Red, Chalk, Jet Black"></div>
+            </div>
+            <div class="gmr-fields-two">
+              <div class="gmr-field"><label>Finish Direction</label><input type="text" placeholder="e.g. Brushed titanium, matte black, or describe a feeling"></div>
+              <div class="gmr-field"><label>Spoke Preference</label><input type="text" placeholder="e.g. 5-spoke, multi-spoke, open to guidance"></div>
+            </div>
+            <div class="gmr-field"><label>How the Car Is Used</label><input type="text" placeholder="e.g. Daily driver, weekend only, track days, car shows, collection"></div>
+            <div class="gmr-field"><label>Engraving <span style="color:var(--t4);font-style:italic">(optional)</span></label><input type="text" placeholder="A name, initials, date, or coordinate to carry on the wheel"></div>
+            <div class="gmr-field"><label>Partner Code <span style="color:var(--t4);font-style:italic">(if applicable)</span></label><input type="text" placeholder="If applicable"></div>
+            <div class="gmr-field">
+              <label>Your Vision</label>
+              <textarea placeholder="Describe it as you feel it — the look you imagine, what you want someone to notice when they walk past, what these wheels should say about who you are."></textarea>
+            </div>
+            <label class="gmr-checkbox-field"><input type="checkbox"> I'd like to meet in person at the GAMARAY Atelier.</label>
+            <div style="margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--b1)">
+              <p style="font-size:11px;color:var(--t4);font-style:italic;line-height:1.8;margin-bottom:1.25rem">What you've shared here is the beginning, not the brief. If your commission is accepted, we will reach out directly to begin the real conversation: materials in hand, finishes to touch, dimensions drawn to your exact car.</p>
+              <button type="submit" class="btn-gold" style="width:100%;text-align:center;padding:16px">Send My Vision →</button>
+            </div>
+          </form>
+          <div class="gmr-form-confirm" style="display:none;padding:3rem 0;text-align:center">
+            <p style="font-family:var(--serif);font-size:24px;font-weight:300;color:var(--t1);margin-bottom:1rem">We have received your commission request.</p>
+            <p style="font-size:12px;color:var(--t3);font-style:italic;line-height:1.9;max-width:400px;margin:0 auto">Every submission is read by our team directly. If we are the right house for you, you will hear from us, personally.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── PORSCHE 911 EXHAUST ── -->
+    <div class="gmr-tab-panel" data-tab-panel="exhaust-porsche">
+      <div class="gmr-form-section reveal" style="border:none;margin-bottom:0">
+        <div class="gmr-form-section-header">
+          <span class="gmr-eyebrow">Porsche 911 · Exhaust Commission</span>
+          <h2 class="gmr-heading" style="font-size:clamp(24px,3vw,36px)">Configure Your System.</h2>
+          <p style="font-family:var(--serif);font-size:16px;font-style:italic;color:var(--t3);margin-bottom:.25rem">Select platform, material, scope, and finish. Your configuration travels with your inquiry.</p>
+        </div>
+      </div>
+      <div class="gmr-configurator-wrap">
+        <iframe data-src="exhaust-configurator.html?v=3" title="GAMARAY Porsche Exhaust Configurator" loading="lazy"></iframe>
+      </div>
+    </div>
+
+    <!-- ── EXHAUST OTHER VEHICLES ── -->
+    <div class="gmr-tab-panel" data-tab-panel="exhaust-other">
+      <div class="gmr-form-section reveal">
+        <div class="gmr-form-section-header">
+          <span class="gmr-eyebrow">Exhaust · All Other Vehicles</span>
+          <h2 class="gmr-heading" style="font-size:clamp(24px,3vw,36px)">Commission Your Exhaust.</h2>
+          <p style="font-family:var(--serif);font-size:16px;font-style:italic;color:var(--t3);margin-bottom:.5rem">The voice is part of the character. Before we build anything, we listen.</p>
+          <p style="font-size:11px;color:var(--t4);font-style:italic;margin-bottom:1.5rem">For Ferrari, Lamborghini, Rolls-Royce, McLaren, Bentley, Aston Martin, and others. Every commission begins with a conversation, tell us about your car below.</p>
+        </div>
+        <div class="gmr-form-section-body">
+          <form class="gmr-form">
+            <div class="gmr-fields-two">
+              <div class="gmr-field"><label>Your Name</label><input type="text" placeholder="Full name" required></div>
+              <div class="gmr-field"><label>Where We Reach You</label><input type="email" placeholder="Email address" required></div>
+            </div>
+            <div class="gmr-fields-two">
+              <div class="gmr-field"><label>Your Location</label><input type="text" placeholder="City, State"></div>
+              <div class="gmr-field"><label>Year</label><input type="text" placeholder="e.g. 2022"></div>
+            </div>
+            <div class="gmr-field"><label>The Car</label><input type="text" placeholder="e.g. Ferrari 812 Competizione, Lamborghini Huracán Tecnica" required></div>
+            <div class="gmr-field"><label>VIN <span style="color:var(--t4);font-style:italic">(optional)</span></label><input type="text" placeholder="Confirms fitment compatibility"></div>
+            <hr class="gmr-form-divider">
+            <div class="gmr-fields-two">
+              <div class="gmr-field"><label>Material Preference</label><input type="text" placeholder="e.g. Titanium, Stainless Steel, or unsure"></div>
+              <div class="gmr-field"><label>Tip Finish</label><input type="text" placeholder="e.g. Brushed, polished, ceramic black, carbon"></div>
+            </div>
+            <div class="gmr-fields-two">
+              <div class="gmr-field"><label>Sound Direction</label><input type="text" placeholder="e.g. Aggressive, refined, somewhere between"></div>
+              <div class="gmr-field"><label>How the Car Is Used</label><input type="text" placeholder="e.g. Daily, weekend, track, collection"></div>
+            </div>
+            <div class="gmr-field"><label>Engraving <span style="color:var(--t4);font-style:italic">(optional)</span></label><input type="text" placeholder="A name, initials, or date on the system"></div>
+            <div class="gmr-field"><label>Partner Code <span style="color:var(--t4);font-style:italic">(if applicable)</span></label><input type="text" placeholder="If applicable"></div>
+            <div class="gmr-field">
+              <label>Your Vision</label>
+              <textarea placeholder="Describe what you want: what it should sound like at idle, at full throttle, what you want to feel when you start the car in the morning. Any detail helps."></textarea>
+            </div>
+            <label class="gmr-checkbox-field"><input type="checkbox"> I'd like to meet in person at the GAMARAY Atelier.</label>
+            <div style="margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--b1)">
+              <button type="submit" class="btn-gold" style="width:100%;text-align:center;padding:16px">Send My Vision →</button>
+            </div>
+          </form>
+          <div class="gmr-form-confirm" style="display:none;padding:3rem 0;text-align:center">
+            <p style="font-family:var(--serif);font-size:24px;font-weight:300;color:var(--t1);margin-bottom:1rem">Your inquiry has been received.</p>
+            <p style="font-size:12px;color:var(--t3);font-style:italic;line-height:1.9;max-width:440px;margin:0 auto">We will review your details and be in touch directly, with questions, a proposal, or an invitation to visit the atelier.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="gmr-trust-strip">
+  <div class="gmr-trust-item"><span class="gmr-trust-dot"></span>Every Submission Read Personally</div>
+  <div class="gmr-trust-item"><span class="gmr-trust-dot"></span>No Payment Until Everything Is Agreed</div>
+  <div class="gmr-trust-item"><span class="gmr-trust-dot"></span>Provenance Warranty on Every Build</div>
+  <div class="gmr-trust-item"><span class="gmr-trust-dot"></span>By Appointment Only</div>
+</div>
+
+<footer id="gmr-footer">
+  <div class="gmr-footer-grid">
+    <div>
+      <a href="index.html" class="gmr-footer-logo"><img src="img/logo.png" alt="GAMARAY"></a>
+      <p class="gmr-footer-tagline">Designed in Texas. Felt Everywhere.</p>
+    </div>
+    <div>
+      <span class="gmr-footer-heading">Navigation</span>
+      <ul class="gmr-footer-links">
+        <li><a href="the-work.html">The Work</a></li>
+        <li><a href="the-house.html">The House</a></li>
+        <li><a href="the-atelier.html">The Atelier</a></li>
+        <li><a href="warranty.html">Warranty</a></li>
+        <li><a href="exchange.html">The Exchange</a></li>
+        <li><a href="begin.html">Begin</a></li>
+      </ul>
+    </div>
+    <div>
+      <span class="gmr-footer-heading">Contact</span>
+      <ul class="gmr-footer-links">
+        <li><a href="mailto:info@gamarayperformance.com">info@gamarayperformance.com</a></li>
+        <li><a href="https://www.instagram.com/gamarayperformance/" target="_blank" rel="noopener">@gamarayperformance</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="gmr-footer-bottom">
+    <span>© 2026 GAMARAY · San Antonio, Texas · By Appointment</span>
+    <a href="https://www.instagram.com/gamarayperformance/" target="_blank" rel="noopener" style="color:var(--t4);transition:color .2s" onmouseover="this.style.color='var(--t1)'" onmouseout="this.style.color='var(--t4)'">@gamarayperformance</a>
+  </div>
+</footer>
+<script src="js/gamaray.js?v=9"></script>
+<script>
+(function () {
+  var iframe = document.querySelector('.gmr-configurator-wrap iframe[data-src]');
+  if (!iframe) return;
+  var observer = new IntersectionObserver(function (entries) {
+    if (entries[0].isIntersecting) { iframe.src = iframe.dataset.src; observer.disconnect(); }
+  }, { rootMargin: '200px' });
+  observer.observe(iframe);
+})();
+</script>
+</body>
+</html>

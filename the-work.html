@@ -1,0 +1,1082 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Work — GAMARAY</title>
+<meta name="description" content="GAMARAY Signature Wheels and bespoke exhaust systems for the world's finest European machines.">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Montserrat:wght@200;300;400;500;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Montserrat:wght@200;300;400;500;600&display=swap" media="print" onload="this.media='all'">
+<link rel="stylesheet" href="css/gamaray.css?v=10">
+<style>
+/* Acquisition steps inline with no number if not sequential */
+.gmr-acq-note {
+  border: 1px solid var(--b2);
+  padding: 1.5rem 2rem;
+  margin-top: 2rem;
+  position: relative;
+}
+.gmr-acq-note::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold2), transparent);
+}
+.gmr-acq-note p {
+  font-size: 12px; line-height: 1.9; color: var(--t3); font-style: italic;
+}
+/* Wheel detail list */
+.wheel-detail-list {
+  list-style: none;
+  display: flex; flex-direction: column; gap: .5rem;
+  margin-top: 1.5rem;
+}
+.wheel-detail-list li {
+  font-size: 12px; color: var(--t3);
+  display: flex; gap: 10px; align-items: flex-start;
+}
+.wheel-detail-list li::before { content: '—'; color: var(--gold2); flex-shrink: 0; }
+/* Section divider */
+.section-divider {
+  padding: 5rem 3.5rem 0;
+  border-top: 1px solid var(--b1);
+}
+
+/* ── PRODUCT GALLERY LIGHTBOX ── */
+.gmr-gallery-overlay {
+  position: fixed; inset: 0;
+  background: rgba(6,5,4,.97);
+  z-index: 3000;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 1.25rem;
+  padding: 3.5rem 2rem 2rem;
+  opacity: 0; pointer-events: none;
+  transition: opacity .4s;
+}
+.gmr-gallery-overlay.open { opacity: 1; pointer-events: auto; }
+.gmr-gallery-close {
+  position: absolute; top: 2rem; right: 2rem;
+  background: none; border: none;
+  color: var(--t4); font-size: 20px; cursor: pointer; padding: 8px;
+  transition: color .2s, transform .3s var(--ease);
+}
+.gmr-gallery-close:hover { color: var(--t1); transform: rotate(90deg); }
+.gmr-gallery-eyebrow {
+  font-size: 9px; letter-spacing: .22em; text-transform: uppercase; color: var(--gold);
+}
+.gmr-gallery-stage {
+  display: flex; align-items: center; gap: 2rem;
+  flex: 1; width: 100%; max-width: 960px; min-height: 0;
+}
+.gmr-gallery-img-wrap {
+  flex: 1; display: flex; align-items: center; justify-content: center; min-height: 0;
+}
+.gmr-gallery-main-img {
+  max-width: 100%; max-height: 62vh;
+  object-fit: contain; display: block;
+  transition: opacity .2s;
+}
+.gmr-gallery-arrow {
+  background: none; border: 1px solid rgba(200,168,106,.2);
+  color: var(--t4); width: 48px; height: 48px;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; font-size: 24px; font-family: Georgia, serif; line-height: 1;
+  transition: color .2s, border-color .2s; flex-shrink: 0;
+}
+.gmr-gallery-arrow:hover { color: var(--gold); border-color: var(--gold); }
+.gmr-gallery-counter {
+  font-size: 10px; letter-spacing: .14em; color: var(--t4);
+}
+.gmr-gallery-thumbs { display: flex; gap: 10px; }
+.gmr-gallery-thumb {
+  width: 72px; height: 72px; object-fit: cover; cursor: pointer;
+  opacity: .35; border: 1px solid transparent;
+  transition: opacity .25s, border-color .25s;
+}
+.gmr-gallery-thumb:hover { opacity: .75; }
+.gmr-gallery-thumb.active { opacity: 1; border-color: var(--gold); }
+/* Hover overlay on real-photo card image */
+.gmr-wheel-img-hover {
+  position: absolute; inset: 0;
+  background: rgba(0,0,0,.52);
+  display: flex; align-items: center; justify-content: center;
+  opacity: 0; pointer-events: none;
+  transition: opacity .35s;
+}
+.gmr-wheel-img[data-gallery-open]:hover .gmr-wheel-img-hover { opacity: 1; }
+.gmr-wheel-img-hover span {
+  font-size: 8px; letter-spacing: .24em; text-transform: uppercase;
+  color: var(--t1); border: 1px solid rgba(255,255,255,.45); padding: 8px 18px;
+}
+</style>
+</head>
+<body>
+
+<div id="gmr-loader"><div class="loader-wordmark"><img src="img/logo.png" alt="GAMARAY"></div></div>
+<div id="gmr-cursor"></div>
+<div id="gmr-progress"></div>
+
+<nav id="gmr-nav">
+  <button class="gmr-hamburger" id="gmr-hamburger" aria-label="Open menu"><span></span><span></span></button>
+  <a href="index.html" class="gmr-nav-logo"><img src="img/logo.png" alt="GAMARAY"></a>
+  <a href="begin.html" class="gmr-nav-cta">Begin</a>
+</nav>
+<div id="gmr-nav-backdrop"></div>
+<div id="gmr-mobile-menu">
+  <button class="gmr-menu-close" id="gmr-menu-close">✕</button>
+  <a href="the-work.html">The Work</a>
+  <a href="the-house.html">The House</a>
+  <a href="the-atelier.html">The Atelier</a>
+  <a href="warranty.html">Warranty</a>
+  <a href="exchange.html">The Exchange</a>
+  <a href="begin.html">Begin</a>
+</div>
+
+<!-- ── PAGE HERO ── -->
+<div class="gmr-page-hero">
+  <video autoplay loop muted playsinline style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.6;z-index:0">
+    <source src="https://pub-9fed0892d72f46c8ace5f8382cff40e8.r2.dev/Videos/Turning%20of%20Art%20deco%20center%20piece%20Wheel.mp4" type="video/mp4">
+  </video>
+  <div style="position:absolute;inset:0;z-index:1;background:
+    linear-gradient(to top,  rgba(0,0,0,.97) 0%, rgba(0,0,0,.55) 38%, rgba(0,0,0,.08) 68%, transparent 85%),
+    linear-gradient(to bottom, rgba(0,0,0,.82) 0%, rgba(0,0,0,.18) 28%, transparent 50%),
+    linear-gradient(to right,  rgba(0,0,0,.55) 0%, transparent 18%),
+    linear-gradient(to left,   rgba(0,0,0,.55) 0%, transparent 18%)">
+  </div>
+  <div style="position:relative;z-index:2">
+    <span class="gmr-eyebrow">GAMARAY · Commissions</span>
+    <h1 class="gmr-heading" style="font-size:clamp(52px,8vw,96px);margin-bottom:0">The Work.</h1>
+  </div>
+</div>
+
+<!-- ── OVERVIEW ── -->
+<section class="gmr-section gmr-section-black" id="overview">
+  <video autoplay loop muted playsinline style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.92;z-index:0;pointer-events:none">
+    <source src="https://pub-9fed0892d72f46c8ace5f8382cff40e8.r2.dev/Videos/Wheel%20turning%20video.MP4" type="video/mp4">
+  </video>
+  <div style="position:absolute;inset:0;z-index:1;background:rgba(8,7,6,.55);pointer-events:none"></div>
+  <div style="position:relative;z-index:2">
+  <div class="reveal" style="max-width:660px;margin:0 auto 4rem;text-align:center">
+    <span class="gmr-eyebrow">THE WORK</span>
+    <h2 class="gmr-heading" style="font-size:clamp(28px,3.5vw,44px)">What We Make.</h2>
+    <div class="gmr-rule gmr-rule-center"></div>
+    <p class="gmr-body" style="color:var(--t3);margin:0 auto">Three disciplines. One standard. GAMARAY creates original wheels, fully bespoke wheel commissions, and exhaust systems shaped around the identity of the vehicle.</p>
+    <p style="margin-top:2rem;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold2)">Select a section to navigate directly ↓</p>
+  </div>
+  <div class="gmr-discipline-grid">
+    <a href="#signature-wheels" class="gmr-discipline-card">
+      <span class="gmr-discipline-num">01</span>
+      <div class="gmr-discipline-name">Signature<br>Wheels</div>
+      <p class="gmr-discipline-desc">Original designs from the GAMARAY collection, engineered and finished for compatible vehicle applications.</p>
+      <span class="gmr-discipline-cta">View the Collection →</span>
+    </a>
+    <a href="#bespoke-wheels" class="gmr-discipline-card gmr-discipline-card--featured">
+      <span class="gmr-discipline-num">02</span>
+      <span class="gmr-discipline-tag">The Full Commission</span>
+      <div class="gmr-discipline-name">Bespoke<br>Wheels</div>
+      <p class="gmr-discipline-desc">One client. One set. Designed from first principles around the car and its owner.</p>
+      <span class="gmr-discipline-cta">Begin a Commission →</span>
+    </a>
+    <a href="#exhaust" class="gmr-discipline-card">
+      <span class="gmr-discipline-num">03</span>
+      <div class="gmr-discipline-name">Exhaust<br>Systems</div>
+      <p class="gmr-discipline-desc">Titanium and stainless-steel systems engineered for flow, tone, and presence.</p>
+      <span class="gmr-discipline-cta">Explore Systems →</span>
+    </a>
+  </div>
+  </div>
+</section>
+
+<!-- ── SECTION NAV ── -->
+<nav class="gmr-section-nav" id="gmr-section-nav">
+  <a href="#signature-wheels" class="gmr-section-nav-item" data-section="signature-wheels">
+    <span class="gmr-section-nav-num">01</span>
+    <span>Signature Wheels</span>
+  </a>
+  <a href="#bespoke-wheels" class="gmr-section-nav-item" data-section="bespoke-wheels">
+    <span class="gmr-section-nav-num">02</span>
+    <span>Bespoke Wheels</span>
+  </a>
+  <a href="#exhaust" class="gmr-section-nav-item" data-section="exhaust">
+    <span class="gmr-section-nav-num">03</span>
+    <span>Exhaust Systems</span>
+  </a>
+</nav>
+
+<!-- ════════════════════════════════════════════════════
+     SIGNATURE WHEELS
+════════════════════════════════════════════════════════ -->
+<section class="gmr-section gmr-section-black" id="signature-wheels">
+
+  <!-- Intro text -->
+  <div class="reveal" style="max-width:500px;margin-bottom:3rem">
+    <span class="gmr-eyebrow">SIGNATURE WHEELS</span>
+    <h2 class="gmr-heading">Original by GAMARAY.</h2>
+    <p class="gmr-subheading">A collection defined by our approach to proportion, structure, and form. Select a design, then work directly with our team to determine fitment, finish, and personalization.</p>
+  </div>
+
+  <!-- How acquisition works — steps left, image right as true columns -->
+  <div class="reveal" style="display:flex;align-items:stretch;overflow:hidden;gap:0">
+
+    <!-- Steps: vertical stack, left column -->
+    <div style="flex:1;min-width:0;display:flex;flex-direction:column;gap:1px;background:var(--b1);border:1px solid var(--b1)">
+      <div class="gmr-step">
+        <div class="gmr-step-num">01</div>
+        <div class="gmr-step-title">Choose a Design</div>
+        <p class="gmr-step-desc">Explore the collection and select the design that belongs on your car.</p>
+      </div>
+      <div class="gmr-step">
+        <div class="gmr-step-num">02</div>
+        <div class="gmr-step-title">Refine the Details</div>
+        <p class="gmr-step-desc">We confirm fitment, finish, and personalization with you directly.</p>
+      </div>
+      <div class="gmr-step">
+        <div class="gmr-step-num">03</div>
+        <div class="gmr-step-title">Begin Production</div>
+        <p class="gmr-step-desc">Once approved, production begins. Your set is documented in the GAMARAY Registry.</p>
+      </div>
+    </div>
+
+    <!-- Image: right column, same height as steps -->
+    <div style="flex:0 0 42%;position:relative;overflow:hidden;min-height:320px">
+      <img src="https://pub-9fed0892d72f46c8ace5f8382cff40e8.r2.dev/Photos/Detail%20shot%2019.30%20wheel.jpg"
+           alt="GAMARAY Signature Wheel Detail"
+           style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;display:block">
+      <div style="position:absolute;inset:0;background:linear-gradient(to right,#0A0A08 0%,rgba(10,10,8,.4) 25%,transparent 60%)"></div>
+      <div style="position:absolute;inset:0;background:linear-gradient(to bottom,#0A0A08 0%,transparent 20%,transparent 78%,#0A0A08 100%)"></div>
+    </div>
+
+  </div>
+
+  <!-- Acquisition note -->
+  <div class="gmr-acq-note reveal">
+    <p>There is no payment on this page. Every acquisition begins with a direct conversation.</p>
+  </div>
+
+  <!-- Wheel Gallery -->
+  <div class="gmr-wheel-gallery" style="margin-top:3rem">
+
+    <!-- Card 1: GR-06.2 -->
+    <div class="gmr-wheel-card reveal">
+      <div class="gmr-wheel-img" data-gallery-open="gr062" style="cursor:pointer">
+        <img src="https://pub-9fed0892d72f46c8ace5f8382cff40e8.r2.dev/Photos/1.png" alt="GR-06.2 Wheel" loading="lazy">
+        <div class="gmr-wheel-img-hover"><span>View Gallery</span></div>
+      </div>
+      <div class="gmr-wheel-info">
+        <span class="gmr-wheel-edition">Limited Edition</span>
+        <div class="gmr-wheel-name">GR-06.2</div>
+        <div class="gmr-wheel-platform">Available Upon Inquiry</div>
+        <p style="font-size:13px;color:var(--t3);font-style:italic;line-height:1.7;margin-bottom:.75rem">The second evolution of the 06 line. Refined geometry with a sharper, more resolved profile.</p>
+        <div class="gmr-wheel-status status-available">
+          <span class="status-dot"></span>Available
+        </div>
+      </div>
+      <div class="gmr-wheel-card-footer" style="display:flex;gap:1rem;justify-content:space-between">
+        <button class="gmr-wheel-cta" data-gallery-open="gr062">View Gallery →</button>
+        <button class="gmr-wheel-cta"
+          data-modal-open="wheel-interest"
+          data-wheel-name="GR-06.2"
+          data-wheel-platform="Available Upon Inquiry">
+          Express Interest →
+        </button>
+      </div>
+    </div>
+
+    <!-- Card 2: GR-74.2 -->
+    <div class="gmr-wheel-card reveal reveal-delay-1">
+      <div class="gmr-wheel-img" data-gallery-open="gr742" style="cursor:pointer">
+        <img src="https://pub-9fed0892d72f46c8ace5f8382cff40e8.r2.dev/Photos/10.png" alt="GR-74.2 Wheel" loading="lazy">
+        <div class="gmr-wheel-img-hover"><span>View Gallery</span></div>
+      </div>
+      <div class="gmr-wheel-info">
+        <span class="gmr-wheel-edition">Limited Edition</span>
+        <div class="gmr-wheel-name">GR-74.2</div>
+        <div class="gmr-wheel-platform">Available Upon Inquiry</div>
+        <p style="font-size:13px;color:var(--t3);font-style:italic;line-height:1.7;margin-bottom:.75rem">Carbon construction with a forged core, developed for reduced weight without sacrificing presence.</p>
+        <div class="gmr-wheel-status status-available">
+          <span class="status-dot"></span>Available
+        </div>
+      </div>
+      <div class="gmr-wheel-card-footer" style="display:flex;gap:1rem;justify-content:space-between">
+        <button class="gmr-wheel-cta" data-gallery-open="gr742">View Gallery →</button>
+        <button class="gmr-wheel-cta"
+          data-modal-open="wheel-interest"
+          data-wheel-name="GR-74.2"
+          data-wheel-platform="Available Upon Inquiry">
+          Express Interest →
+        </button>
+      </div>
+    </div>
+
+    <!-- Card 3: GR-19.30 -->
+    <div class="gmr-wheel-card reveal reveal-delay-2">
+      <div class="gmr-wheel-img" data-gallery-open="gr1930" style="cursor:pointer">
+        <img src="https://pub-9fed0892d72f46c8ace5f8382cff40e8.r2.dev/Photos/16.png" alt="GR-19.30 Wheel" loading="lazy">
+        <div class="gmr-wheel-img-hover"><span>View Gallery</span></div>
+      </div>
+      <div class="gmr-wheel-info">
+        <span class="gmr-wheel-edition">Limited Edition</span>
+        <div class="gmr-wheel-name">GR-19.30</div>
+        <div class="gmr-wheel-platform">Available Upon Inquiry</div>
+        <p style="font-size:13px;color:var(--t3);font-style:italic;line-height:1.7;margin-bottom:.75rem">Forged and finished to specification. Every surface considered.</p>
+        <div class="gmr-wheel-status status-available">
+          <span class="status-dot"></span>Available
+        </div>
+      </div>
+      <div class="gmr-wheel-card-footer" style="display:flex;gap:1rem;justify-content:space-between">
+        <button class="gmr-wheel-cta" data-gallery-open="gr1930">View Gallery →</button>
+        <button class="gmr-wheel-cta"
+          data-modal-open="wheel-interest"
+          data-wheel-name="GR-19.30"
+          data-wheel-platform="Available Upon Inquiry">
+          Express Interest →
+        </button>
+      </div>
+    </div>
+
+    <!-- Card 4: GR-06.1 -->
+    <div class="gmr-wheel-card reveal">
+      <div class="gmr-wheel-img" data-gallery-open="gr06" style="cursor:pointer">
+        <img src="https://pub-9fed0892d72f46c8ace5f8382cff40e8.r2.dev/Photos/8.png" alt="GR-06.1 Wheel" loading="lazy">
+        <div class="gmr-wheel-img-hover"><span>View Gallery</span></div>
+      </div>
+      <div class="gmr-wheel-info">
+        <span class="gmr-wheel-edition">Edition of 6</span>
+        <div class="gmr-wheel-name">GR-06.1</div>
+        <div class="gmr-wheel-platform">Porsche Cayman · GT4 Compatible · 20"</div>
+        <p style="font-size:13px;color:var(--t3);font-style:italic;line-height:1.7;margin-bottom:.75rem">A forged five-spoke design developed for Porsche Cayman and GT4 applications.</p>
+        <div class="gmr-wheel-status status-available">
+          <span class="status-dot"></span>Available
+        </div>
+      </div>
+      <div class="gmr-wheel-card-footer" style="display:flex;gap:1rem;justify-content:space-between">
+        <button class="gmr-wheel-cta" data-gallery-open="gr06">View Gallery →</button>
+        <button class="gmr-wheel-cta"
+          data-modal-open="wheel-interest"
+          data-wheel-name="GR-06.1"
+          data-wheel-platform="Porsche Cayman · GT4 Compatible · 20&quot;">
+          Express Interest →
+        </button>
+      </div>
+    </div>
+
+    <!-- Card 5: GR-74.1 -->
+    <div class="gmr-wheel-card reveal reveal-delay-1">
+      <div class="gmr-wheel-img" data-gallery-open="gr74" style="cursor:pointer">
+        <img src="https://pub-9fed0892d72f46c8ace5f8382cff40e8.r2.dev/Photos/5.png" alt="GR-74.1 Wheel" loading="lazy">
+        <div class="gmr-wheel-img-hover"><span>View Gallery</span></div>
+      </div>
+      <div class="gmr-wheel-info">
+        <span class="gmr-wheel-edition">Edition of 6</span>
+        <div class="gmr-wheel-name">GR-74.1</div>
+        <div class="gmr-wheel-platform">Porsche 911 GT3 · 992 · 21"</div>
+        <p style="font-size:13px;color:var(--t3);font-style:italic;line-height:1.7;margin-bottom:.75rem">A lightweight forged design developed for the Porsche 992 GT3.</p>
+        <div class="gmr-wheel-status status-available">
+          <span class="status-dot"></span>Available
+        </div>
+      </div>
+      <div class="gmr-wheel-card-footer" style="display:flex;gap:1rem;justify-content:space-between">
+        <button class="gmr-wheel-cta" data-gallery-open="gr74">View Gallery →</button>
+        <button class="gmr-wheel-cta"
+          data-modal-open="wheel-interest"
+          data-wheel-name="GR-74.1"
+          data-wheel-platform="Porsche 911 GT3 · 992 · 21&quot;">
+          Express Interest →
+        </button>
+      </div>
+    </div>
+
+    <!-- Card 6: GR-00 -->
+    <div class="gmr-wheel-card reveal reveal-delay-2">
+      <div class="gmr-wheel-img" data-gallery-open="gr00" style="cursor:pointer">
+        <img src="https://pub-9fed0892d72f46c8ace5f8382cff40e8.r2.dev/Photos/4.png" alt="GR-00 Wheel" loading="lazy">
+        <div class="gmr-wheel-img-hover"><span>View Gallery</span></div>
+      </div>
+      <div class="gmr-wheel-info">
+        <span class="gmr-wheel-edition">Limited Edition</span>
+        <div class="gmr-wheel-name">GR-00</div>
+        <div class="gmr-wheel-platform">Available Upon Inquiry</div>
+        <p style="font-size:13px;color:var(--t3);font-style:italic;line-height:1.7;margin-bottom:.75rem">The origin of the collection. Drawn from first principles.</p>
+        <div class="gmr-wheel-status status-available">
+          <span class="status-dot"></span>Available
+        </div>
+      </div>
+      <div class="gmr-wheel-card-footer" style="display:flex;gap:1rem;justify-content:space-between">
+        <button class="gmr-wheel-cta" data-gallery-open="gr00">View Gallery →</button>
+        <button class="gmr-wheel-cta"
+          data-modal-open="wheel-interest"
+          data-wheel-name="GR-00"
+          data-wheel-platform="Available Upon Inquiry">
+          Express Interest →
+        </button>
+      </div>
+    </div>
+
+    <!-- Card 7: GR-24 -->
+    <div class="gmr-wheel-card reveal">
+      <div class="gmr-wheel-img" data-gallery-open="gr24" style="cursor:pointer">
+        <img src="https://pub-9fed0892d72f46c8ace5f8382cff40e8.r2.dev/Photos/14.png" alt="GR-24 Wheel" loading="lazy">
+        <div class="gmr-wheel-img-hover"><span>View Gallery</span></div>
+      </div>
+      <div class="gmr-wheel-info">
+        <span class="gmr-wheel-edition">Limited Edition</span>
+        <div class="gmr-wheel-name">GR-24</div>
+        <div class="gmr-wheel-platform">Available Upon Inquiry</div>
+        <p style="font-size:13px;color:var(--t3);font-style:italic;line-height:1.7;margin-bottom:.75rem">Sculpted spoke geometry with a deliberate, architectural profile.</p>
+        <div class="gmr-wheel-status status-available">
+          <span class="status-dot"></span>Available
+        </div>
+      </div>
+      <div class="gmr-wheel-card-footer" style="display:flex;gap:1rem;justify-content:space-between">
+        <button class="gmr-wheel-cta" data-gallery-open="gr24">View Gallery →</button>
+        <button class="gmr-wheel-cta"
+          data-modal-open="wheel-interest"
+          data-wheel-name="GR-24"
+          data-wheel-platform="Available Upon Inquiry">
+          Express Interest →
+        </button>
+      </div>
+    </div>
+
+    <!-- Card 8: GR-007 -->
+    <div class="gmr-wheel-card reveal reveal-delay-1">
+      <div class="gmr-wheel-img" data-gallery-open="gr007" style="cursor:pointer">
+        <img src="https://pub-9fed0892d72f46c8ace5f8382cff40e8.r2.dev/Photos/11.png" alt="GR-007 Wheel" loading="lazy">
+        <div class="gmr-wheel-img-hover"><span>View Gallery</span></div>
+      </div>
+      <div class="gmr-wheel-info">
+        <span class="gmr-wheel-edition">Limited Edition</span>
+        <div class="gmr-wheel-name">GR-007</div>
+        <div class="gmr-wheel-platform">Available Upon Inquiry</div>
+        <p style="font-size:13px;color:var(--t3);font-style:italic;line-height:1.7;margin-bottom:.75rem">Precise and restrained. Nothing decorative without purpose.</p>
+        <div class="gmr-wheel-status status-available">
+          <span class="status-dot"></span>Available
+        </div>
+      </div>
+      <div class="gmr-wheel-card-footer" style="display:flex;gap:1rem;justify-content:space-between">
+        <button class="gmr-wheel-cta" data-gallery-open="gr007">View Gallery →</button>
+        <button class="gmr-wheel-cta"
+          data-modal-open="wheel-interest"
+          data-wheel-name="GR-007"
+          data-wheel-platform="Available Upon Inquiry">
+          Express Interest →
+        </button>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Exchange note -->
+  <div class="gmr-acq-note reveal" style="margin-top:2rem">
+    <p>Thirty percent of a Signature commission may carry forward toward a future bespoke commission and remain with the vehicle. <a href="exchange.html" style="color:var(--gold);border-bottom:1px solid var(--gold2)">Discover The Exchange →</a></p>
+  </div>
+</section>
+
+<!-- ── WHEEL INTEREST MODAL ── -->
+<div class="gmr-modal-overlay" id="modal-wheel-interest">
+  <div class="gmr-modal">
+    <div class="gmr-modal-header">
+      <div>
+        <div class="gmr-modal-title">Express Interest</div>
+        <div class="gmr-modal-sub gmr-modal-wheel-name">GAMARAY Signature Wheel</div>
+        <p class="gmr-modal-sub" style="margin-top:6px">Tell us about your car. We will be in touch directly.</p>
+      </div>
+      <button class="gmr-modal-close" data-modal-close>✕</button>
+    </div>
+    <div class="gmr-modal-body">
+      <form class="gmr-form">
+        <div class="gmr-field">
+          <label>Your Name</label>
+          <input type="text" placeholder="Full name" required>
+        </div>
+        <div class="gmr-field">
+          <label>Where We Reach You</label>
+          <input type="email" placeholder="Email address" required>
+        </div>
+        <div class="gmr-fields-two">
+          <div class="gmr-field">
+            <label>Your Location</label>
+            <input type="text" placeholder="City, State">
+          </div>
+          <div class="gmr-field">
+            <label>Year</label>
+            <input type="text" placeholder="e.g. 2024">
+          </div>
+        </div>
+        <div class="gmr-field">
+          <label>The Car</label>
+          <input type="text" placeholder="e.g. Porsche 911 Carrera S, Guards Red" required>
+        </div>
+        <div class="gmr-field">
+          <label>VIN <span style="color:var(--t4);font-style:italic">(optional)</span></label>
+          <input type="text" placeholder="Helps confirm exact fitment">
+        </div>
+        <div class="gmr-field">
+          <label>Anything to Add</label>
+          <textarea placeholder="Personalization ideas, questions, or anything you'd like us to know before we call."></textarea>
+        </div>
+        <button type="submit" class="btn-gold" style="width:100%;text-align:center">Send My Interest →</button>
+      </form>
+      <div class="gmr-form-confirm" style="display:none;padding:2rem 0;text-align:center">
+        <p style="font-family:var(--serif);font-size:20px;font-weight:300;color:var(--t1);margin-bottom:.75rem">Interest received.</p>
+        <p style="font-size:12px;color:var(--t3);font-style:italic;line-height:1.8">A member of our team will be in touch within 5 business days. Nothing is invoiced or charged until everything is agreed.</p>
+      </div>
+    </div>
+    <div class="gmr-modal-footer">
+      <p style="font-size:10px;color:var(--t4);font-style:italic">No payment is requested until we have spoken and every detail of your commission is confirmed.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ── GR-06.1 GALLERY LIGHTBOX ── -->
+<div class="gmr-gallery-overlay" id="gmr-gallery-overlay">
+  <button class="gmr-gallery-close" data-gallery-close aria-label="Close gallery">✕</button>
+  <div class="gmr-gallery-eyebrow">GR-06.1 · Porsche Cayman</div>
+  <div class="gmr-gallery-stage">
+    <button class="gmr-gallery-arrow" data-gallery-prev aria-label="Previous">‹</button>
+    <div class="gmr-gallery-img-wrap">
+      <img class="gmr-gallery-main-img" src="" alt="">
+    </div>
+    <button class="gmr-gallery-arrow" data-gallery-next aria-label="Next">›</button>
+  </div>
+  <div class="gmr-gallery-counter">1 / 3</div>
+  <div class="gmr-gallery-thumbs">
+    <img class="gmr-gallery-thumb" data-gallery-thumb="0"
+      src="https://pub-9fed0892d72f46c8ace5f8382cff40e8.r2.dev/Photos/GR-06.1%20ON%20CAYMAN%20.jpg"
+      alt="GR-06.1 on Cayman" loading="lazy">
+    <img class="gmr-gallery-thumb" data-gallery-thumb="1"
+      src="https://pub-9fed0892d72f46c8ace5f8382cff40e8.r2.dev/Photos/8.png"
+      alt="GR-06.1 Wheel" loading="lazy">
+    <img class="gmr-gallery-thumb" data-gallery-thumb="2"
+      src="https://pub-9fed0892d72f46c8ace5f8382cff40e8.r2.dev/Photos/7.png"
+      alt="GR-06.1 Wheel" loading="lazy">
+  </div>
+</div>
+
+<!-- ── GR-06.2 GALLERY LIGHTBOX ── -->
+<div class="gmr-gallery-overlay" id="gmr-gallery-overlay-gr062">
+  <button class="gmr-gallery-close" data-gallery-close="gr062" aria-label="Close gallery">✕</button>
+  <div class="gmr-gallery-eyebrow">GR-06.2</div>
+  <div class="gmr-gallery-stage">
+    <button class="gmr-gallery-arrow" data-gallery-prev="gr062" aria-label="Previous">‹</button>
+    <div class="gmr-gallery-img-wrap"><img class="gmr-gallery-main-img" src="" alt=""></div>
+    <button class="gmr-gallery-arrow" data-gallery-next="gr062" aria-label="Next">›</button>
+  </div>
+  <div class="gmr-gallery-counter">1 / 2</div>
+  <div class="gmr-gallery-thumbs">
+    <img class="gmr-gallery-thumb" data-gallery-thumb="0" src="https://pub-9fed0892d72f46c8ace5f8382cff40e8.r2.dev/Photos/1.png" alt="GR-06.2" loading="lazy">
+    <img class="gmr-gallery-thumb" data-gallery-thumb="1" src="https://pub-9fed0892d72f46c8ace5f8382cff40e8.r2.dev/Photos/2.png" alt="GR-06.2" loading="lazy">
+  </div>
+</div>
+
+<!-- ── GR-24 GALLERY LIGHTBOX ── -->
+<div class="gmr-gallery-overlay" id="gmr-gallery-overlay-gr24">
+  <button class="gmr-gallery-close" data-gallery-close="gr24" aria-label="Close gallery">✕</button>
+  <div class="gmr-gallery-eyebrow">GR-24</div>
+  <div class="gmr-gallery-stage">
+    <button class="gmr-gallery-arrow" data-gallery-prev="gr24" aria-label="Previous">‹</button>
+    <div class="gmr-gallery-img-wrap"><img class="gmr-gallery-main-img" src="" alt=""></div>
+    <button class="gmr-gallery-arrow" data-gallery-next="gr24" aria-label="Next">›</button>
+  </div>
+  <div class="gmr-gallery-counter">1 / 2</div>
+  <div class="gmr-gallery-thumbs">
+    <img class="gmr-gallery-thumb" data-gallery-thumb="0" src="https://pub-9fed0892d72f46c8ace5f8382cff40e8.r2.dev/Photos/14.png" alt="GR-24" loading="lazy">
+    <img class="gmr-gallery-thumb" data-gallery-thumb="1" src="https://pub-9fed0892d72f46c8ace5f8382cff40e8.r2.dev/Photos/13.png" alt="GR-24" loading="lazy">
+  </div>
+</div>
+
+<!-- ── GR-007 GALLERY LIGHTBOX ── -->
+<div class="gmr-gallery-overlay" id="gmr-gallery-overlay-gr007">
+  <button class="gmr-gallery-close" data-gallery-close="gr007" aria-label="Close gallery">✕</button>
+  <div class="gmr-gallery-eyebrow">GR-007</div>
+  <div class="gmr-gallery-stage">
+    <button class="gmr-gallery-arrow" data-gallery-prev="gr007" aria-label="Previous">‹</button>
+    <div class="gmr-gallery-img-wrap"><img class="gmr-gallery-main-img" src="" alt=""></div>
+    <button class="gmr-gallery-arrow" data-gallery-next="gr007" aria-label="Next">›</button>
+  </div>
+  <div class="gmr-gallery-counter">1 / 2</div>
+  <div class="gmr-gallery-thumbs">
+    <img class="gmr-gallery-thumb" data-gallery-thumb="0" src="https://pub-9fed0892d72f46c8ace5f8382cff40e8.r2.dev/Photos/12.png" alt="GR-007" loading="lazy">
+    <img class="gmr-gallery-thumb" data-gallery-thumb="1" src="https://pub-9fed0892d72f46c8ace5f8382cff40e8.r2.dev/Photos/11.png" alt="GR-007" loading="lazy">
+  </div>
+</div>
+
+<!-- ── GR-74.2 GALLERY LIGHTBOX ── -->
+<div class="gmr-gallery-overlay" id="gmr-gallery-overlay-gr742">
+  <button class="gmr-gallery-close" data-gallery-close="gr742" aria-label="Close gallery">✕</button>
+  <div class="gmr-gallery-eyebrow">GR-74.2 · Full Carbon Fiber</div>
+  <div class="gmr-gallery-stage">
+    <button class="gmr-gallery-arrow" data-gallery-prev="gr742" aria-label="Previous">‹</button>
+    <div class="gmr-gallery-img-wrap"><img class="gmr-gallery-main-img" src="" alt=""></div>
+    <button class="gmr-gallery-arrow" data-gallery-next="gr742" aria-label="Next">›</button>
+  </div>
+  <div class="gmr-gallery-counter">1 / 2</div>
+  <div class="gmr-gallery-thumbs">
+    <img class="gmr-gallery-thumb" data-gallery-thumb="0" src="https://pub-9fed0892d72f46c8ace5f8382cff40e8.r2.dev/Photos/10.png" alt="GR-74.2" loading="lazy">
+    <img class="gmr-gallery-thumb" data-gallery-thumb="1" src="https://pub-9fed0892d72f46c8ace5f8382cff40e8.r2.dev/Photos/9.png" alt="GR-74.2" loading="lazy">
+  </div>
+</div>
+
+<!-- ── GR-19.30 GALLERY LIGHTBOX ── -->
+<div class="gmr-gallery-overlay" id="gmr-gallery-overlay-gr1930">
+  <button class="gmr-gallery-close" data-gallery-close="gr1930" aria-label="Close gallery">✕</button>
+  <div class="gmr-gallery-eyebrow">GR-19.30</div>
+  <div class="gmr-gallery-stage">
+    <button class="gmr-gallery-arrow" data-gallery-prev="gr1930" aria-label="Previous">‹</button>
+    <div class="gmr-gallery-img-wrap">
+      <img class="gmr-gallery-main-img" src="" alt="">
+    </div>
+    <button class="gmr-gallery-arrow" data-gallery-next="gr1930" aria-label="Next">›</button>
+  </div>
+  <div class="gmr-gallery-counter">1 / 2</div>
+  <div class="gmr-gallery-thumbs">
+    <img class="gmr-gallery-thumb" data-gallery-thumb="0"
+      src="https://pub-9fed0892d72f46c8ace5f8382cff40e8.r2.dev/Photos/16.png"
+      alt="GR-19.30 Wheel" loading="lazy">
+    <img class="gmr-gallery-thumb" data-gallery-thumb="1"
+      src="https://pub-9fed0892d72f46c8ace5f8382cff40e8.r2.dev/Photos/15.png"
+      alt="GR-19.30 Wheel" loading="lazy">
+  </div>
+</div>
+
+<!-- ── GR-00 GALLERY LIGHTBOX ── -->
+<div class="gmr-gallery-overlay" id="gmr-gallery-overlay-gr00">
+  <button class="gmr-gallery-close" data-gallery-close="gr00" aria-label="Close gallery">✕</button>
+  <div class="gmr-gallery-eyebrow">GR-00 · The Origin</div>
+  <div class="gmr-gallery-stage">
+    <button class="gmr-gallery-arrow" data-gallery-prev="gr00" aria-label="Previous">‹</button>
+    <div class="gmr-gallery-img-wrap">
+      <img class="gmr-gallery-main-img" src="" alt="">
+    </div>
+    <button class="gmr-gallery-arrow" data-gallery-next="gr00" aria-label="Next">›</button>
+  </div>
+  <div class="gmr-gallery-counter">1 / 2</div>
+  <div class="gmr-gallery-thumbs">
+    <img class="gmr-gallery-thumb" data-gallery-thumb="0"
+      src="https://pub-9fed0892d72f46c8ace5f8382cff40e8.r2.dev/Photos/3.png"
+      alt="GR-00 Wheel" loading="lazy">
+    <img class="gmr-gallery-thumb" data-gallery-thumb="1"
+      src="https://pub-9fed0892d72f46c8ace5f8382cff40e8.r2.dev/Photos/4.png"
+      alt="GR-00 Wheel" loading="lazy">
+  </div>
+</div>
+
+<!-- ── GR-74.1 GALLERY LIGHTBOX ── -->
+<div class="gmr-gallery-overlay" id="gmr-gallery-overlay-gr74">
+  <button class="gmr-gallery-close" data-gallery-close="gr74" aria-label="Close gallery">✕</button>
+  <div class="gmr-gallery-eyebrow">GR-74.1 · Porsche 911 GT3</div>
+  <div class="gmr-gallery-stage">
+    <button class="gmr-gallery-arrow" data-gallery-prev="gr74" aria-label="Previous">‹</button>
+    <div class="gmr-gallery-img-wrap">
+      <img class="gmr-gallery-main-img" src="" alt="">
+    </div>
+    <button class="gmr-gallery-arrow" data-gallery-next="gr74" aria-label="Next">›</button>
+  </div>
+  <div class="gmr-gallery-counter">1 / 2</div>
+  <div class="gmr-gallery-thumbs">
+    <img class="gmr-gallery-thumb" data-gallery-thumb="0"
+      src="https://pub-9fed0892d72f46c8ace5f8382cff40e8.r2.dev/Photos/6.png"
+      alt="GR-74.1 Wheel" loading="lazy">
+    <img class="gmr-gallery-thumb" data-gallery-thumb="1"
+      src="https://pub-9fed0892d72f46c8ace5f8382cff40e8.r2.dev/Photos/5.png"
+      alt="GR-74.1 Wheel" loading="lazy">
+    <img class="gmr-gallery-thumb" data-gallery-thumb="2"
+      src="https://pub-9fed0892d72f46c8ace5f8382cff40e8.r2.dev/Photos/GR-74.1%20WITH%20HORSE.jpg"
+      alt="GR-74.1 with Horse" loading="lazy">
+  </div>
+</div>
+
+<hr class="gmr-hr">
+
+<!-- ════════════════════════════════════════════════════
+     BESPOKE WHEELS COMMISSION
+════════════════════════════════════════════════════════ -->
+<section class="gmr-section gmr-section-s1" id="bespoke-wheels" style="overflow:hidden">
+
+  <!-- Background video -->
+  <video autoplay loop muted playsinline
+         style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;opacity:1;pointer-events:none;z-index:0">
+    <source src="https://pub-9fed0892d72f46c8ace5f8382cff40e8.r2.dev/Videos/Turning%20Wheel.mov" type="video/mp4">
+  </video>
+  <!-- Edge fades -->
+  <div aria-hidden="true" style="position:absolute;inset:0;pointer-events:none;z-index:1;background:
+    linear-gradient(to right,  var(--s1) 0%, rgba(14,13,11,.5) 10%, transparent 30%, transparent 70%, rgba(14,13,11,.5) 90%, var(--s1) 100%),
+    linear-gradient(to bottom, var(--s1) 0%, rgba(14,13,11,.4) 8%, transparent 22%, transparent 78%, rgba(14,13,11,.4) 92%, var(--s1) 100%)">
+  </div>
+
+  <div class="reveal" style="text-align:center;max-width:680px;margin:0 auto 4.5rem;position:relative;z-index:2">
+    <span class="gmr-eyebrow">The Full Commission</span>
+    <p style="font-family:var(--serif);font-size:clamp(22px,2.8vw,34px);font-weight:300;color:var(--t1);line-height:1.55;font-style:italic;margin-top:1.25rem">"A great tailor does not show you a catalogue. He studies you, then he cuts."</p>
+    <div class="gmr-rule gmr-rule-center" style="margin-top:2rem"></div>
+    <p style="font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-top:1.5rem">Bespoke Wheels · GAMARAY</p>
+  </div>
+  <div class="gmr-two-col-wide" style="position:relative;z-index:2">
+    <div class="reveal">
+      <span class="gmr-eyebrow">BESPOKE WHEELS</span>
+      <h2 class="gmr-heading">Designed With You.<br><em>Built for No One Else.</em></h2>
+      <div class="gmr-rule"></div>
+      <p class="gmr-body">A fully bespoke wheel begins with the car, its proportions, and the person behind it. Together, we define the geometry, fitment, finish, and personal details. The final set is engineered and forged in aerospace-grade 6061-T6 aluminum exclusively for your commission.</p>
+      <ul class="wheel-detail-list">
+        <li>Original geometry developed from first principles</li>
+        <li>Finish and materials selected with you</li>
+        <li>Optional personal engraving</li>
+        <li>Spare wheel included</li>
+        <li>Lifetime structural warranty</li>
+        <li>Five-year road protection</li>
+        <li>GAMARAY Registry and NFC Certificate of Assurance</li>
+      </ul>
+      <a href="begin.html" class="btn-gold" style="margin-top:2rem;display:inline-block">Begin Your Commission →</a>
+    </div>
+    <div>
+      <div class="gmr-info-box gold-border" style="border-color:var(--gold2)">
+        <div class="gmr-info-box-title" style="color:var(--gold);font-size:9px;letter-spacing:.18em;text-transform:uppercase;margin-bottom:1rem">What you've shared here is the beginning — not the brief.</div>
+        <p class="gmr-info-box-body">If your commission is accepted, we will reach out directly to begin the real conversation: materials in hand, finishes to touch, dimensions drawn to your exact car. The design process at GAMARAY is unhurried and personal. This form is simply where it starts.</p>
+      </div>
+      <div style="margin-top:2rem">
+        <span class="gmr-eyebrow" style="margin-bottom:.75rem;display:block">Engineering</span>
+        <p class="gmr-body">FEA simulation and structural analysis validate bending fatigue, impact tolerance, and high-speed performance before production begins.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="gmr-hr">
+
+<!-- ════════════════════════════════════════════════════
+     EXHAUST SYSTEMS
+════════════════════════════════════════════════════════ -->
+<section class="gmr-section gmr-section-black" id="exhaust" style="overflow:hidden">
+
+  <!-- Background image -->
+  <img src="https://pub-9fed0892d72f46c8ace5f8382cff40e8.r2.dev/Photos/ss%20turbo%20s%20.jpg"
+       alt="" aria-hidden="true"
+       style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;opacity:1;pointer-events:none;z-index:0">
+  <!-- Edge fades -->
+  <div aria-hidden="true" style="position:absolute;inset:0;pointer-events:none;z-index:1;background:
+    linear-gradient(to right,  #0A0A08 0%, rgba(10,10,8,.6) 8%, transparent 22%, transparent 78%, rgba(10,10,8,.6) 92%, #0A0A08 100%),
+    linear-gradient(to bottom, #0A0A08 0%, rgba(10,10,8,.5) 6%, transparent 18%, transparent 82%, rgba(10,10,8,.5) 94%, #0A0A08 100%)">
+  </div>
+
+  <div class="reveal" style="position:relative;z-index:2">
+    <span class="gmr-eyebrow">BESPOKE EXHAUST</span>
+    <h2 class="gmr-heading">The Voice of the Machine.</h2>
+  </div>
+
+  <div class="gmr-two-col-wide reveal" style="margin-top:2.5rem;position:relative;z-index:2">
+    <div>
+      <p class="gmr-body">Sound is a design material. Every GAMARAY exhaust is engineered around the engine, the vehicle, and the tonal character requested by its owner.</p>
+
+      <div style="margin-top:2rem">
+        <span class="gmr-eyebrow" style="margin-bottom:1rem;display:block">What We Engineer</span>
+        <ul class="gmr-list">
+          <li>Material & Character: Titanium or stainless steel, selected for tone as much as performance</li>
+          <li>Optimized Flow: Scavenging, back pressure, and valve configuration calibrated to your engine</li>
+          <li>Engraved Identity: A name, a date, initials, carried quietly on every system</li>
+          <li>All systems carry a Provenance Warranty: structural coverage that transfers with the vehicle</li>
+        </ul>
+      </div>
+    </div>
+    <div>
+      <div class="gmr-info-box">
+        <div class="gmr-info-box-title">Materials</div>
+        <p class="gmr-info-box-body" style="margin-bottom:1rem">T304 Stainless Steel — Polished silver or ceramic coated in bronze, black, or white.</p>
+        <p class="gmr-info-box-body">Titanium — Polished silver or heat-finished in gold, blue, or purple.</p>
+      </div>
+      <div class="gmr-info-box" style="margin-top:1rem">
+        <div class="gmr-info-box-title">GAMARAY Signature Configuration</div>
+        <p class="gmr-info-box-body">Every system is protected by the transferable GAMARAY Provenance Warranty.</p>
+        <p class="gmr-info-box-body" style="margin-top:.75rem;font-style:italic;color:var(--t4)">Porsche commissions are configured with ceramic coating and an active valve system by default. Both may be adjusted to suit the commission.</p>
+      </div>
+      <div class="gmr-info-box" style="margin-top:1rem">
+        <div class="gmr-info-box-title">Other Vehicles</div>
+        <p class="gmr-info-box-body" style="margin-bottom:1.25rem">Ferrari. Lamborghini. McLaren. Rolls-Royce. Aston Martin. If it deserves the finest exhaust, we will build it. Every commission begins with a conversation.</p>
+        <a href="begin.html" class="btn-gold" style="display:inline-block;font-size:10px">Commission Your Exhaust →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── EXHAUST CONFIGURATOR ── -->
+<section class="gmr-section gmr-section-s1" style="padding-top:5rem;padding-bottom:5rem">
+  <div class="reveal" style="padding-bottom:2.5rem">
+    <span class="gmr-eyebrow">PORSCHE 911</span>
+    <h3 class="gmr-heading" style="font-size:clamp(24px,3vw,38px)">Build Your System.</h3>
+    <p class="gmr-body">Select your platform, material, system configuration, and finish. Your selections will accompany your inquiry, and our team will refine the final specification with you.</p>
+  </div>
+
+  <!-- Cinematic exhaust video -->
+  <div style="position:relative;overflow:hidden;height:52vh;margin:0 -4rem 3.5rem;min-height:320px">
+    <video autoplay loop muted playsinline
+           style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;display:block">
+      <source src="https://pub-9fed0892d72f46c8ace5f8382cff40e8.r2.dev/Videos/Exhaust%20system%20light%20bar%20cinema%20video.mov" type="video/mp4">
+    </video>
+    <div style="position:absolute;inset:0;background:
+      linear-gradient(to right,  var(--s1) 0%, rgba(14,13,11,.4) 8%, transparent 22%, transparent 78%, rgba(14,13,11,.4) 92%, var(--s1) 100%),
+      linear-gradient(to bottom, var(--s1) 0%, transparent 16%, transparent 84%, var(--s1) 100%);
+      pointer-events:none"></div>
+  </div>
+
+  <div class="gmr-configurator-wrap">
+    <iframe data-src="exhaust-configurator.html?v=3" title="GAMARAY Exhaust Configurator" loading="lazy"></iframe>
+  </div>
+</section>
+
+<div class="gmr-trust-strip">
+  <div class="gmr-trust-item"><span class="gmr-trust-dot"></span>Handcrafted in Texas</div>
+  <div class="gmr-trust-item"><span class="gmr-trust-dot"></span>No Payment Until Agreed</div>
+  <div class="gmr-trust-item"><span class="gmr-trust-dot"></span>Provenance Warranty</div>
+  <div class="gmr-trust-item"><span class="gmr-trust-dot"></span>Every Build Unique</div>
+  <div class="gmr-trust-item"><span class="gmr-trust-dot"></span>By Appointment Only</div>
+</div>
+
+<!-- ── FOOTER ── -->
+<footer id="gmr-footer">
+  <div class="gmr-footer-grid">
+    <div>
+      <a href="index.html" class="gmr-footer-logo"><img src="img/logo.png" alt="GAMARAY"></a>
+      <p class="gmr-footer-tagline">Designed in Texas. Felt Everywhere.</p>
+    </div>
+    <div>
+      <span class="gmr-footer-heading">Navigation</span>
+      <ul class="gmr-footer-links">
+        <li><a href="the-work.html">The Work</a></li>
+        <li><a href="the-house.html">The House</a></li>
+        <li><a href="the-atelier.html">The Atelier</a></li>
+        <li><a href="warranty.html">Warranty</a></li>
+        <li><a href="exchange.html">The Exchange</a></li>
+        <li><a href="begin.html">Begin</a></li>
+      </ul>
+    </div>
+    <div>
+      <span class="gmr-footer-heading">Programs</span>
+      <ul class="gmr-footer-links">
+        <li><a href="warranty.html">Provenance Warranty</a></li>
+        <li><a href="exchange.html">The Exchange</a></li>
+        <li><a href="the-atelier.html#commission">Atelier Commission</a></li>
+        <li><a href="mailto:info@gamarayperformance.com">info@gamarayperformance.com</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="gmr-footer-bottom">
+    <span>© 2026 GAMARAY · San Antonio, Texas · By Appointment</span>
+    <a href="https://www.instagram.com/gamarayperformance/" target="_blank" rel="noopener" style="color:var(--t4);transition:color .2s" onmouseover="this.style.color='var(--t1)'" onmouseout="this.style.color='var(--t4)'">@gamarayperformance</a>
+  </div>
+</footer>
+
+<script src="js/gamaray.js?v=9"></script>
+<script>
+(function () {
+  var sectionNav = document.getElementById('gmr-section-nav');
+  var items      = document.querySelectorAll('.gmr-section-nav-item[data-section]');
+  if (!sectionNav || !items.length) return;
+
+  var sections = [];
+  items.forEach(function (item) {
+    var el = document.getElementById(item.dataset.section);
+    if (el) sections.push({ item: item, el: el, top: 0 });
+  });
+
+  // Cache offsets — re-read on resize to avoid forced reflow in scroll handler
+  function cacheTops() {
+    sections.forEach(function (s) { s.top = s.el.offsetTop; });
+  }
+  cacheTops();
+  window.addEventListener('resize', cacheTops);
+
+  // Highlight active section on scroll — uses cached tops, no reflow
+  function updateActive() {
+    var threshold = window.scrollY + 160;
+    var current = null;
+    sections.forEach(function (s) {
+      if (threshold >= s.top) current = s.el.id;
+    });
+    sections.forEach(function (s) {
+      s.item.classList.toggle('active', s.el.id === current);
+    });
+  }
+  window.addEventListener('scroll', updateActive, { passive: true });
+  updateActive();
+
+  // Anchor clicks — instant scroll so inertia scroll takes over cleanly
+  var isInertia = !window.matchMedia('(pointer: coarse)').matches;
+  document.querySelectorAll('a[href^="#"]').forEach(function (link) {
+    link.addEventListener('click', function (e) {
+      var id = link.getAttribute('href').slice(1);
+      if (!id) return;
+      var target = document.getElementById(id);
+      if (!target) return;
+      e.preventDefault();
+      var offset = 80 + sectionNav.offsetHeight + 8;
+      var top = target.getBoundingClientRect().top + window.scrollY - offset;
+      window.scrollTo({ top: top, behavior: isInertia ? 'auto' : 'smooth' });
+    });
+  });
+})();
+
+// Curtain reveal — scroll-driven upward unmask (RAF-throttled)
+(function () {
+  var curtains = document.querySelectorAll('.gmr-curtain');
+  if (!curtains.length) return;
+
+  var ticking = false;
+
+  function updateCurtains() {
+    var wh = window.innerHeight;
+    curtains.forEach(function (el) {
+      var rect = el.getBoundingClientRect();
+      var progress = Math.max(0, Math.min(1, (wh - rect.top) / (wh * 0.75)));
+      var clip = ((1 - progress) * 100).toFixed(2);
+      el.style.clipPath = 'inset(' + clip + '% 0 0 0)';
+    });
+    ticking = false;
+  }
+
+  window.addEventListener('scroll', function () {
+    if (!ticking) {
+      requestAnimationFrame(updateCurtains);
+      ticking = true;
+    }
+  }, { passive: true });
+  updateCurtains();
+})();
+
+// Lazy-load configurator iframe — only fetches when scrolled into view
+(function () {
+  var iframe = document.querySelector('.gmr-configurator-wrap iframe[data-src]');
+  if (!iframe) return;
+  var observer = new IntersectionObserver(function (entries) {
+    if (entries[0].isIntersecting) {
+      iframe.src = iframe.dataset.src;
+      observer.disconnect();
+    }
+  }, { rootMargin: '200px' });
+  observer.observe(iframe);
+})();
+
+// Gallery lightbox — handles multiple galleries
+(function () {
+  var galleries = {
+    'gr06': {
+      overlayId: 'gmr-gallery-overlay',
+      slides: [
+        { src: 'https://pub-9fed0892d72f46c8ace5f8382cff40e8.r2.dev/Photos/GR-06.1%20ON%20CAYMAN%20.jpg', alt: 'GR-06.1 on Porsche Cayman' },
+        { src: 'https://pub-9fed0892d72f46c8ace5f8382cff40e8.r2.dev/Photos/8.png', alt: 'GR-06.1 Wheel Detail' },
+        { src: 'https://pub-9fed0892d72f46c8ace5f8382cff40e8.r2.dev/Photos/7.png', alt: 'GR-06.1 Wheel Detail' }
+      ]
+    },
+    'gr062': {
+      overlayId: 'gmr-gallery-overlay-gr062',
+      slides: [
+        { src: 'https://pub-9fed0892d72f46c8ace5f8382cff40e8.r2.dev/Photos/1.png', alt: 'GR-06.2 Wheel' },
+        { src: 'https://pub-9fed0892d72f46c8ace5f8382cff40e8.r2.dev/Photos/2.png', alt: 'GR-06.2 Wheel' }
+      ]
+    },
+    'gr24': {
+      overlayId: 'gmr-gallery-overlay-gr24',
+      slides: [
+        { src: 'https://pub-9fed0892d72f46c8ace5f8382cff40e8.r2.dev/Photos/14.png', alt: 'GR-24 Wheel' },
+        { src: 'https://pub-9fed0892d72f46c8ace5f8382cff40e8.r2.dev/Photos/13.png', alt: 'GR-24 Wheel' }
+      ]
+    },
+    'gr007': {
+      overlayId: 'gmr-gallery-overlay-gr007',
+      slides: [
+        { src: 'https://pub-9fed0892d72f46c8ace5f8382cff40e8.r2.dev/Photos/12.png', alt: 'GR-007 Wheel' },
+        { src: 'https://pub-9fed0892d72f46c8ace5f8382cff40e8.r2.dev/Photos/11.png', alt: 'GR-007 Wheel' }
+      ]
+    },
+    'gr742': {
+      overlayId: 'gmr-gallery-overlay-gr742',
+      slides: [
+        { src: 'https://pub-9fed0892d72f46c8ace5f8382cff40e8.r2.dev/Photos/10.png', alt: 'GR-74.2 Wheel' },
+        { src: 'https://pub-9fed0892d72f46c8ace5f8382cff40e8.r2.dev/Photos/9.png',  alt: 'GR-74.2 Wheel' }
+      ]
+    },
+    'gr1930': {
+      overlayId: 'gmr-gallery-overlay-gr1930',
+      slides: [
+        { src: 'https://pub-9fed0892d72f46c8ace5f8382cff40e8.r2.dev/Photos/16.png', alt: 'GR-19.30 Wheel' },
+        { src: 'https://pub-9fed0892d72f46c8ace5f8382cff40e8.r2.dev/Photos/15.png', alt: 'GR-19.30 Wheel' }
+      ]
+    },
+    'gr00': {
+      overlayId: 'gmr-gallery-overlay-gr00',
+      slides: [
+        { src: 'https://pub-9fed0892d72f46c8ace5f8382cff40e8.r2.dev/Photos/3.png', alt: 'GR-00 Wheel' },
+        { src: 'https://pub-9fed0892d72f46c8ace5f8382cff40e8.r2.dev/Photos/4.png', alt: 'GR-00 Wheel' }
+      ]
+    },
+    'gr74': {
+      overlayId: 'gmr-gallery-overlay-gr74',
+      slides: [
+        { src: 'https://pub-9fed0892d72f46c8ace5f8382cff40e8.r2.dev/Photos/6.png',                    alt: 'GR-74.1 Wheel' },
+        { src: 'https://pub-9fed0892d72f46c8ace5f8382cff40e8.r2.dev/Photos/5.png',                    alt: 'GR-74.1 Wheel' },
+        { src: 'https://pub-9fed0892d72f46c8ace5f8382cff40e8.r2.dev/Photos/GR-74.1%20WITH%20HORSE.jpg', alt: 'GR-74.1 with Horse' }
+      ]
+    }
+  };
+
+  var activeId  = null;
+  var currentIdx = 0;
+
+  function getOverlay(id) { return document.getElementById(galleries[id].overlayId); }
+
+  function showSlide(id, idx) {
+    var g = galleries[id];
+    var overlay  = getOverlay(id);
+    var mainImg  = overlay.querySelector('.gmr-gallery-main-img');
+    var thumbEls = overlay.querySelectorAll('.gmr-gallery-thumb');
+    var counter  = overlay.querySelector('.gmr-gallery-counter');
+    currentIdx = ((idx % g.slides.length) + g.slides.length) % g.slides.length;
+    mainImg.style.opacity = '0';
+    setTimeout(function () {
+      mainImg.src = g.slides[currentIdx].src;
+      mainImg.alt = g.slides[currentIdx].alt;
+      mainImg.style.opacity = '1';
+    }, 150);
+    thumbEls.forEach(function (t, i) { t.classList.toggle('active', i === currentIdx); });
+    if (counter) counter.textContent = (currentIdx + 1) + ' / ' + g.slides.length;
+  }
+
+  function openGallery(id) {
+    activeId = id;
+    getOverlay(id).classList.add('open');
+    document.body.style.overflow = 'hidden';
+    showSlide(id, 0);
+  }
+
+  function closeAll() {
+    Object.keys(galleries).forEach(function (id) {
+      getOverlay(id).classList.remove('open');
+    });
+    document.body.style.overflow = '';
+    activeId = null;
+  }
+
+  document.addEventListener('click', function (e) {
+    var opener = e.target.closest('[data-gallery-open]');
+    if (opener) { openGallery(opener.dataset.galleryOpen); return; }
+
+    if (activeId) {
+      var overlay = getOverlay(activeId);
+      if (e.target.closest('[data-gallery-close]') || e.target === overlay) { closeAll(); return; }
+      if (e.target.closest('[data-gallery-prev]'))  { showSlide(activeId, currentIdx - 1); return; }
+      if (e.target.closest('[data-gallery-next]'))  { showSlide(activeId, currentIdx + 1); return; }
+      var thumb = e.target.closest('[data-gallery-thumb]');
+      if (thumb) showSlide(activeId, parseInt(thumb.dataset.galleryThumb, 10));
+    }
+  });
+
+  document.addEventListener('keydown', function (e) {
+    if (!activeId) return;
+    if (e.key === 'Escape')     closeAll();
+    if (e.key === 'ArrowLeft')  showSlide(activeId, currentIdx - 1);
+    if (e.key === 'ArrowRight') showSlide(activeId, currentIdx + 1);
+  });
+})();
+</script>
+</body>
+</html>

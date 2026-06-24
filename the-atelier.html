@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Atelier — GAMARAY</title>
+<meta name="description" content="The GAMARAY Atelier in San Antonio, Texas. By appointment. By commission. Bespoke commissions, white-glove service, surface preservation, track preparation, and installation for select vehicles.">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Montserrat:wght@200;300;400;500;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Montserrat:wght@200;300;400;500;600&display=swap" media="print" onload="this.media='all'">
+<link rel="stylesheet" href="css/gamaray.css?v=10">
+<style>
+  .gmr-page-hero::after { display: none; }
+
+  .atelier-divider {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+    margin: 0 auto;
+    max-width: 120px;
+  }
+  .atelier-divider::before,
+  .atelier-divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--gold2);
+    opacity: .4;
+  }
+  .atelier-divider-dot {
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: var(--gold);
+    opacity: .7;
+  }
+
+  .atelier-services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 2px;
+    margin-top: 3rem;
+  }
+  .atelier-service-card {
+    background: rgba(255,255,255,.03);
+    border: 1px solid rgba(255,255,255,.07);
+    padding: 2.5rem 2rem;
+    transition: background .3s, border-color .3s;
+  }
+  .atelier-service-card:hover {
+    background: rgba(255,255,255,.055);
+    border-color: rgba(179,142,76,.25);
+  }
+  .atelier-service-card-num {
+    font-family: var(--mono, 'Montserrat', sans-serif);
+    font-size: 9px;
+    font-weight: 500;
+    letter-spacing: .2em;
+    color: var(--gold);
+    opacity: .7;
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+  }
+  .atelier-service-card-title {
+    font-family: var(--serif);
+    font-size: clamp(18px, 2vw, 24px);
+    font-weight: 400;
+    color: var(--t1);
+    margin-bottom: .75rem;
+    line-height: 1.25;
+  }
+  .atelier-service-card-body {
+    font-family: var(--sans);
+    font-size: 12px;
+    font-weight: 300;
+    color: var(--t3);
+    line-height: 1.8;
+    letter-spacing: .02em;
+  }
+
+  .atelier-private-band {
+    background: var(--gold);
+    color: #0A0A08;
+    padding: 3.5rem 2rem;
+    text-align: center;
+  }
+  .atelier-private-band h2 {
+    font-family: var(--serif);
+    font-size: clamp(22px, 3vw, 36px);
+    font-weight: 300;
+    margin-bottom: .75rem;
+    letter-spacing: .01em;
+  }
+  .atelier-private-band p {
+    font-family: var(--sans);
+    font-size: 12px;
+    font-weight: 400;
+    letter-spacing: .04em;
+    text-transform: uppercase;
+    opacity: .75;
+    max-width: 520px;
+    margin: 0 auto 1.75rem;
+  }
+  .atelier-private-band a {
+    display: inline-block;
+    background: #0A0A08;
+    color: var(--gold);
+    font-family: var(--sans);
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    padding: .85rem 2rem;
+    text-decoration: none;
+    transition: opacity .2s;
+  }
+  .atelier-private-band a:hover { opacity: .75; }
+</style>
+</head>
+<body>
+<div id="gmr-loader"><div class="loader-wordmark"><img src="img/logo.png" alt="GAMARAY"></div></div>
+<div id="gmr-cursor"></div>
+<div id="gmr-progress"></div>
+<nav id="gmr-nav">
+  <button class="gmr-hamburger" id="gmr-hamburger" aria-label="Open menu"><span></span><span></span></button>
+  <a href="index.html" class="gmr-nav-logo"><img src="img/logo.png" alt="GAMARAY"></a>
+  <a href="begin.html" class="gmr-nav-cta">Begin</a>
+</nav>
+<div id="gmr-nav-backdrop"></div>
+<div id="gmr-mobile-menu">
+  <button class="gmr-menu-close" id="gmr-menu-close">✕</button>
+  <a href="the-work.html">The Work</a>
+  <a href="the-house.html">The House</a>
+  <a href="the-atelier.html">The Atelier</a>
+  <a href="warranty.html">Warranty</a>
+  <a href="exchange.html">The Exchange</a>
+  <a href="begin.html">Begin</a>
+</div>
+
+<!-- ── HERO ── -->
+<div style="position:relative;overflow:hidden">
+  <img src="https://pub-9fed0892d72f46c8ace5f8382cff40e8.r2.dev/Photos/Atelier%20suit%20Revuelto.jpg"
+       alt="" aria-hidden="true"
+       style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 70%;opacity:.72;pointer-events:none;z-index:0">
+  <div aria-hidden="true" style="position:absolute;inset:0;pointer-events:none;z-index:1;background:
+    linear-gradient(to right, #0A0A08 0%, rgba(10,10,8,.55) 14%, transparent 35%, transparent 65%, rgba(10,10,8,.55) 86%, #0A0A08 100%),
+    linear-gradient(to bottom, #0A0A08 0%, rgba(10,10,8,.35) 8%, transparent 20%, transparent 80%, rgba(10,10,8,.35) 92%, #0A0A08 100%)">
+  </div>
+
+  <div class="gmr-page-hero" style="background:transparent;position:relative;z-index:2">
+    <div style="position:relative;z-index:1">
+      <span class="gmr-eyebrow">GAMARAY · San Antonio, Texas</span>
+      <h1 class="gmr-heading" style="font-size:clamp(48px,7vw,88px);margin-bottom:.75rem">The GAMARAY<br><em>Atelier.</em></h1>
+      <p style="font-family:var(--serif);font-size:clamp(15px,2vw,22px);font-style:italic;color:var(--t2);margin-bottom:.5rem">Come as you are.</p>
+      <p style="font-family:var(--serif);font-size:clamp(15px,2vw,22px);font-style:italic;color:var(--t2);margin-bottom:1.75rem">Leave with something no one else will have.</p>
+      <p style="font-family:var(--sans);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--t4);margin-bottom:2.25rem">By appointment · By commission</p>
+      <a href="begin.html" class="btn-gold">Begin Your Commission →</a>
+    </div>
+  </div>
+
+  <!-- ── THE EXPERIENCE ── -->
+  <section class="gmr-section" style="background:transparent;position:relative;z-index:2" id="experience">
+    <div class="gmr-two-col-wide">
+      <div class="reveal">
+        <span class="gmr-eyebrow">The Experience</span>
+        <h2 class="gmr-heading" style="font-size:clamp(28px,3.5vw,48px)">Not a showroom.<br><em>A studio.</em></h2>
+        <div class="gmr-rule"></div>
+        <p class="gmr-body">See the materials. Hold the finishes. Hear the difference between titanium and stainless steel.</p>
+      </div>
+      <div class="reveal reveal-delay-1">
+        <p class="gmr-body" style="font-style:italic;color:var(--t2);font-family:var(--serif);font-size:clamp(16px,1.8vw,20px);line-height:1.75;margin-bottom:1.5rem">Every project begins with a conversation about your vehicle, your preferences, and how you want it to feel.</p>
+        <p class="gmr-body">From there, we design.</p>
+      </div>
+    </div>
+  </section>
+</div>
+
+<hr class="gmr-hr">
+
+<!-- ── BESPOKE COMMISSIONS ── -->
+<section class="gmr-section" id="bespoke">
+  <div class="gmr-two-col">
+    <div class="reveal">
+      <span class="gmr-eyebrow">Bespoke Commissions</span>
+      <h2 class="gmr-heading" style="font-size:clamp(26px,3vw,42px)">Your vision.<br><em>Our hands.</em></h2>
+      <div class="gmr-rule"></div>
+      <p class="gmr-body">Components created around the vehicle and the person behind it.</p>
+      <p class="gmr-body" style="margin-top:1rem;font-style:italic;color:var(--t3)">Nothing is selected from a template unless you choose it to be.</p>
+      <a href="the-work.html" class="btn-gold" style="margin-top:2rem;display:inline-block">Explore the Work →</a>
+    </div>
+    <div class="reveal reveal-delay-1">
+      <ul class="gmr-list">
+        <li>Bespoke wheel design</li>
+        <li>Tailored exhaust systems</li>
+        <li>Custom finishes and specifications</li>
+        <li>Optional names, dates, coordinates, and inscriptions</li>
+        <li>Installation and final fitment</li>
+        <li>Documented provenance</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<hr class="gmr-hr">
+
+<!-- ── WHITE-GLOVE SERVICE ── -->
+<section class="gmr-section gmr-section-black" id="white-glove">
+  <div class="gmr-two-col">
+    <div class="reveal reveal-delay-1">
+      <ul class="gmr-list">
+        <li>Enclosed vehicle transportation</li>
+        <li>Secure handling and storage</li>
+        <li>Project coordination</li>
+        <li>Progress documentation</li>
+        <li>Final presentation and delivery</li>
+      </ul>
+      <p class="gmr-body" style="margin-top:1.5rem;font-size:11px;color:var(--t4);letter-spacing:.03em">Eligibility is determined by vehicle, location, project scope, and availability.</p>
+      <a href="begin.html" class="btn-gold" style="margin-top:2rem;display:inline-block">Request White-Glove Service →</a>
+    </div>
+    <div class="reveal" style="order:-1">
+      <span class="gmr-eyebrow">White-Glove Service</span>
+      <h2 class="gmr-heading" style="font-size:clamp(26px,3vw,42px)">The vehicle never<br>leaves our care.</h2>
+      <div class="gmr-rule"></div>
+      <p class="gmr-body">Available for eligible vehicles and commissions, our white-glove service manages the experience from collection to final delivery.</p>
+    </div>
+  </div>
+</section>
+
+<hr class="gmr-hr">
+
+<!-- ── SURFACE & PRESERVATION ── -->
+<section class="gmr-section" id="surface">
+  <div class="gmr-two-col">
+    <div class="reveal">
+      <span class="gmr-eyebrow">Surface &amp; Preservation</span>
+      <h2 class="gmr-heading" style="font-size:clamp(26px,3vw,42px)">Protect the finish.<br><em>Preserve the presence.</em></h2>
+      <div class="gmr-rule"></div>
+      <p class="gmr-body">Preparation, protection, and finishing services for select vehicles.</p>
+      <p class="gmr-body" style="margin-top:1rem;font-style:italic;color:var(--t3)">Every service is selected around the vehicle's finish, use, and long-term preservation.</p>
+      <a href="begin.html" class="btn-gold" style="margin-top:2rem;display:inline-block">Explore Protection Services →</a>
+    </div>
+    <div class="reveal reveal-delay-1">
+      <ul class="gmr-list">
+        <li>Paint protection film</li>
+        <li>Color-change and specialty wraps</li>
+        <li>Ceramic coatings</li>
+        <li>Paint correction</li>
+        <li>Exterior and interior detailing</li>
+        <li>Wheel and caliper protection</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<hr class="gmr-hr">
+
+<!-- ── TRACK PREPARATION ── -->
+<section class="gmr-section gmr-section-black" id="track">
+  <div class="gmr-two-col">
+    <div class="reveal reveal-delay-1">
+      <ul class="gmr-list">
+        <li>Pre-track inspection</li>
+        <li>Wheel and tire preparation</li>
+        <li>Brake inspection and fluid service</li>
+        <li>Alignment and suspension setup</li>
+        <li>Ride-height and fitment review</li>
+        <li>Torque and safety checks</li>
+        <li>Post-event inspection</li>
+      </ul>
+      <p class="gmr-body" style="margin-top:1.5rem;font-style:italic;color:var(--t3)">Preparation is tailored to the vehicle, circuit, driver, and intended level of use.</p>
+      <a href="begin.html" class="btn-gold" style="margin-top:2rem;display:inline-block">Begin Track Preparation →</a>
+    </div>
+    <div class="reveal" style="order:-1">
+      <span class="gmr-eyebrow">Track Preparation</span>
+      <h2 class="gmr-heading" style="font-size:clamp(26px,3vw,42px)">Prepared before<br>the first lap.</h2>
+      <div class="gmr-rule"></div>
+      <p class="gmr-body">Vehicle preparation for track days, private driving events, and performance-focused use.</p>
+    </div>
+  </div>
+</section>
+
+<hr class="gmr-hr">
+
+<!-- ── INSTALLATION & FITMENT ── -->
+<section class="gmr-section" id="installation">
+  <div style="max-width:860px;margin:0 auto">
+    <div class="reveal" style="text-align:center;margin-bottom:3rem">
+      <span class="gmr-eyebrow">Installation &amp; Fitment</span>
+      <h2 class="gmr-heading" style="font-size:clamp(26px,3.5vw,48px)">Built with intention.<br><em>Fitted with precision.</em></h2>
+      <div class="gmr-rule gmr-rule-center"></div>
+      <p class="gmr-body" style="max-width:600px;margin:0 auto">We do not deliver a component and disappear. Every GAMARAY product is installed and inspected at the Atelier or through a trusted certified partner. Fitment, finish, and final presentation remain part of the commission.</p>
+    </div>
+    <div class="reveal reveal-delay-1" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1.5rem">
+      <div style="border-top:1px solid rgba(255,255,255,.1);padding-top:1.25rem">
+        <p style="font-family:var(--sans);font-size:11px;font-weight:300;color:var(--t3);letter-spacing:.02em;line-height:1.75">Installation and calibration</p>
+      </div>
+      <div style="border-top:1px solid rgba(255,255,255,.1);padding-top:1.25rem">
+        <p style="font-family:var(--sans);font-size:11px;font-weight:300;color:var(--t3);letter-spacing:.02em;line-height:1.75">Final quality inspection</p>
+      </div>
+      <div style="border-top:1px solid rgba(255,255,255,.1);padding-top:1.25rem">
+        <p style="font-family:var(--sans);font-size:11px;font-weight:300;color:var(--t3);letter-spacing:.02em;line-height:1.75">Road or performance evaluation</p>
+      </div>
+      <div style="border-top:1px solid rgba(255,255,255,.1);padding-top:1.25rem">
+        <p style="font-family:var(--sans);font-size:11px;font-weight:300;color:var(--t3);letter-spacing:.02em;line-height:1.75">Certified partner support beyond Texas</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="gmr-hr">
+
+<!-- ── THE ART COMMISSION ── -->
+<section class="gmr-section gmr-section-black" id="commission">
+  <div class="reveal" style="margin-bottom:3rem">
+    <span class="gmr-eyebrow">The Art Commission</span>
+    <h2 class="gmr-heading">The Wheel as Canvas.</h2>
+    <p class="gmr-subheading">Art collectible embedded in another collectible.</p>
+    <p class="gmr-body" style="max-width:640px">A living program where artists worldwide transform performance into art, and art into motion. Artists from any discipline are invited to interpret a GAMARAY wheel as their medium. The resulting work becomes part of the GAMARAY Collection: documented, exhibited, and in select cases, produced as a limited physical edition carried on the vehicle itself.</p>
+  </div>
+
+  <div class="gmr-products-grid reveal">
+    <div class="gmr-product-card">
+      <span class="gmr-product-tag">Grand Commission · Annual</span>
+      <div class="gmr-product-name">Grand Commission</div>
+      <p class="gmr-product-desc">One artist. Full production. Physical work installed on a client vehicle. Premiered at the GAMARAY Atelier Night, an intimate gathering of collectors, press, and invited artists.</p>
+    </div>
+    <div class="gmr-product-card">
+      <span class="gmr-product-tag">Emerging Voice · Annual</span>
+      <div class="gmr-product-name">Emerging Voice</div>
+      <p class="gmr-product-desc">For artists under 30. Digital-first work. Full Archive inclusion and production grant. The credential of being numbered in the GAMARAY Collection early carries its own weight.</p>
+    </div>
+    <div class="gmr-product-card">
+      <span class="gmr-product-tag">Sensory Prize · Annual</span>
+      <div class="gmr-product-name">Sensory Prize</div>
+      <p class="gmr-product-desc">Best use of the wheel's unique properties as a medium — a surface that lives in two states: still sculpture and kinetic art. Any medium, any career stage.</p>
+    </div>
+  </div>
+
+  <div class="gmr-info-box gold-border" style="margin-top:2.5rem;border-color:var(--gold2)">
+    <div class="gmr-info-box-title" style="color:var(--gold);font-size:9px;letter-spacing:.18em;text-transform:uppercase;margin-bottom:.75rem">Open call · Rolling · No deadline</div>
+    <p class="gmr-info-box-body">Artists submit a concept brief and portfolio link. No fee. No PDF. The GAMARAY jury reviews quarterly. Artists may also be nominated by existing program participants. The open call is always live; there is no gate on when you can begin.</p>
+  </div>
+  <a href="begin.html" class="btn-gold" style="margin-top:2rem;display:inline-block">Apply to the Commission →</a>
+</section>
+
+<!-- ── PRIVATE BY DESIGN ── -->
+<div class="atelier-private-band">
+  <div class="reveal">
+    <h2>Private by Design</h2>
+    <p>The Atelier address is shared after appointment or project approval. Not for exclusivity alone — but for discretion, security, and the attention each vehicle deserves.</p>
+    <a href="begin.html">Request an Appointment →</a>
+  </div>
+</div>
+
+<!-- ── FINAL CTA ── -->
+<div class="gmr-philosophy-section" style="min-height:50vh">
+  <div class="reveal">
+    <span class="gmr-eyebrow" style="display:block;text-align:center;margin-bottom:1.5rem">Begin Your Commission</span>
+    <p class="gmr-philosophy-quote">A component made in isolation is a part.<br>A commission shaped through conversation, designed for one vehicle,<br>and completed under one standard becomes something more.</p>
+    <div class="gmr-rule gmr-rule-center"></div>
+    <a href="begin.html" class="btn-gold">Begin →</a>
+  </div>
+</div>
+
+<footer id="gmr-footer">
+  <div class="gmr-footer-grid">
+    <div>
+      <a href="index.html" class="gmr-footer-logo"><img src="img/logo.png" alt="GAMARAY"></a>
+      <p class="gmr-footer-tagline">Designed in Texas. Felt Everywhere.</p>
+    </div>
+    <div>
+      <span class="gmr-footer-heading">Navigation</span>
+      <ul class="gmr-footer-links">
+        <li><a href="the-work.html">The Work</a></li>
+        <li><a href="the-house.html">The House</a></li>
+        <li><a href="the-atelier.html">The Atelier</a></li>
+        <li><a href="warranty.html">Warranty</a></li>
+        <li><a href="exchange.html">The Exchange</a></li>
+        <li><a href="begin.html">Begin</a></li>
+      </ul>
+    </div>
+    <div>
+      <span class="gmr-footer-heading">Programs</span>
+      <ul class="gmr-footer-links">
+        <li><a href="the-atelier.html#bespoke">Bespoke Commissions</a></li>
+        <li><a href="the-atelier.html#white-glove">White-Glove Service</a></li>
+        <li><a href="the-atelier.html#surface">Surface &amp; Preservation</a></li>
+        <li><a href="the-atelier.html#track">Track Preparation</a></li>
+        <li><a href="the-atelier.html#commission">The Art Commission</a></li>
+        <li><a href="mailto:info@gamarayperformance.com">info@gamarayperformance.com</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="gmr-footer-bottom">
+    <span>© 2026 GAMARAY · San Antonio, Texas · By Appointment</span>
+    <a href="https://www.instagram.com/gamarayperformance/" target="_blank" rel="noopener" style="color:var(--t4);transition:color .2s" onmouseover="this.style.color='var(--t1)'" onmouseout="this.style.color='var(--t4)'">@gamarayperformance</a>
+  </div>
+</footer>
+<script src="js/gamaray.js?v=9"></script>
+</body>
+</html>
