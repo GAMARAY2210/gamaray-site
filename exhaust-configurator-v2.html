@@ -1,0 +1,1329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GAMARAY · Commission</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=Montserrat:wght@200;300;400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#000;--s1:#0C0C0C;--s2:#141414;--s3:#1C1C1C;
+  --t1:#F0EDE8;--t2:#B0ACA6;--t3:#787470;
+  --b1:#242420;--b2:#323230;--b3:#424240;
+  --gold:#C8A86A;--gold2:#A08040;
+  --green:#4A8A3A;
+}
+html,body{height:100%}
+body{background:var(--bg);color:var(--t1);font-family:'Montserrat',sans-serif;font-weight:400;min-height:100vh;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+
+/* ── SHELL ── */
+.shell{display:grid;grid-template-rows:auto 1fr auto;min-height:100vh;max-width:900px;margin:0 auto;padding:0 2.5rem}
+
+/* ── HEADER ── */
+.hdr{display:flex;align-items:center;justify-content:space-between;padding:2rem 0 1.5rem;border-bottom:1px solid var(--b1)}
+.wordmark{font-family:'Montserrat',sans-serif;font-size:12px;font-weight:500;letter-spacing:0.28em;color:var(--t1);text-transform:uppercase}
+.hdr-right{font-size:11px;letter-spacing:0.22em;text-transform:uppercase;color:var(--t3)}
+
+/* ── STEP RAIL ── */
+.step-rail{display:flex;align-items:center;padding:1.5rem 0;border-bottom:1px solid var(--b1);margin-bottom:2.5rem;overflow-x:auto;scrollbar-width:none}
+.step-rail::-webkit-scrollbar{display:none}
+.sr-item{display:flex;align-items:center;gap:8px;white-space:nowrap}
+.sr-num{width:24px;height:24px;border-radius:50%;border:1px solid var(--b3);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:400;color:var(--t3);transition:all 0.4s ease;flex-shrink:0}
+.sr-label{font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:var(--t3);transition:color 0.4s ease}
+.sr-line{flex:1;min-width:20px;height:1px;background:var(--b1);margin:0 12px;position:relative;overflow:hidden}
+.sr-line-fill{position:absolute;top:0;left:0;bottom:0;width:0%;background:var(--gold);transition:width 0.6s ease}
+.sr-item.active .sr-num{border-color:var(--gold);color:var(--gold);background:rgba(200,168,106,.07)}
+.sr-item.active .sr-label{color:var(--t1)}
+.sr-item.done .sr-num{border-color:var(--b3);background:var(--b1);color:var(--t2)}
+.sr-item.done .sr-label{color:var(--t2)}
+.sr-item.done+.sr-line .sr-line-fill{width:100%}
+
+/* ── PRICE PANEL ── */
+.price-panel{display:flex;align-items:baseline;justify-content:space-between;padding:20px 28px;border:1px solid var(--b2);margin-bottom:2.5rem;position:relative;overflow:hidden}
+.price-panel::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent)}
+.price-label{font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:var(--t3)}
+.price-value{font-family:'Cormorant Garamond',serif;font-size:32px;font-weight:300;color:var(--t1);transition:opacity 0.3s ease}
+.price-value.fade{opacity:0.15}
+
+/* ── LABELS ── */
+.sec-label{font-size:11px;letter-spacing:0.22em;text-transform:uppercase;color:var(--t3);margin-bottom:6px;display:block}
+.sec-heading{font-family:'Cormorant Garamond',serif;font-size:34px;font-weight:300;color:var(--t1);margin-bottom:1.5rem;line-height:1.15}
+p.body{font-size:14px;font-weight:400;color:var(--t2);line-height:1.85;margin-bottom:1.5rem}
+.sub-label{font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:var(--gold);margin:1.5rem 0 0.75rem;display:block;padding-top:1.25rem;border-top:1px solid var(--b1)}
+
+/* ── SERIES GRID ── */
+.series-grid{display:grid;grid-template-columns:1fr;gap:1px;background:var(--b1);border:1px solid var(--b1);margin-bottom:1.75rem}
+.series-card{background:var(--s1);padding:3rem 2.5rem;cursor:pointer;transition:background 0.3s ease;position:relative;overflow:hidden;display:flex;align-items:center;gap:3rem}
+.series-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;background:var(--gold);transform:scaleX(0);transform-origin:left;transition:transform 0.4s ease}
+.series-card:hover{background:var(--s2)}.series-card:hover::after{transform:scaleX(1)}
+.series-card.selected{background:var(--s2)}.series-card.selected::after{transform:scaleX(1)}
+.series-eyebrow{font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:var(--t3);margin-bottom:12px;display:block}
+.series-name{font-family:'Cormorant Garamond',serif;font-size:52px;font-weight:300;color:var(--t1);line-height:1;margin-bottom:10px}
+.series-sub{font-size:12px;letter-spacing:0.12em;color:var(--t3);text-transform:uppercase}
+.series-arrow{position:absolute;bottom:2rem;right:2rem;font-size:11px;color:var(--gold);opacity:0;transition:opacity 0.3s,transform 0.3s;transform:translateX(-4px)}
+.series-card:hover .series-arrow,.series-card.selected .series-arrow{opacity:1;transform:translateX(0)}
+
+/* ── GEN GRID ── */
+.gen-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--b1);border:1px solid var(--b1);margin-bottom:1.75rem}
+.gen-card{background:var(--s1);padding:1.75rem 1.5rem;cursor:pointer;transition:background 0.25s ease;position:relative}
+.gen-card::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:var(--gold);transform:scaleX(0);transform-origin:left;transition:transform 0.35s ease}
+.gen-card:hover{background:var(--s2)}.gen-card:hover::before{transform:scaleX(1)}
+.gen-card.selected{background:var(--s2)}.gen-card.selected::before{transform:scaleX(1)}
+.gen-name{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:300;color:var(--t1);margin-bottom:6px}
+.gen-years{font-size:11px;letter-spacing:0.1em;color:var(--t3);text-transform:uppercase}
+
+/* ── VARIANT LIST ── */
+.variant-list{display:flex;flex-direction:column;gap:1px;background:var(--b1);border:1px solid var(--b1);margin-bottom:1.75rem}
+.vc{display:flex;align-items:center;justify-content:space-between;padding:1.1rem 1.75rem;background:var(--s1);cursor:pointer;transition:background 0.2s;position:relative}
+.vc::before{content:'';position:absolute;left:0;top:0;bottom:0;width:1px;background:var(--gold);transform:scaleY(0);transform-origin:top;transition:transform 0.3s}
+.vc:hover{background:var(--s2)}.vc:hover::before{transform:scaleY(1)}
+.vc.selected{background:var(--s2)}.vc.selected::before{transform:scaleY(1)}
+.vc-left{display:flex;flex-direction:column;gap:3px}
+.vc-name{font-size:15px;font-weight:400;color:var(--t1)}
+.vc-tag{font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:var(--t3)}
+.vc-right{display:flex;align-items:center;gap:14px;flex-shrink:0}
+.vc-price{font-family:'Cormorant Garamond',serif;font-size:18px;color:var(--t2)}
+.vc-dot{width:4px;height:4px;border-radius:50%;border:1px solid var(--b3);transition:all 0.25s}
+.vc.selected .vc-dot{background:var(--gold);border-color:var(--gold)}
+
+/* ── BREADCRUMB ── */
+.breadcrumb{display:flex;align-items:center;gap:10px;margin-bottom:1.75rem;font-size:12px;letter-spacing:0.12em;text-transform:uppercase}
+.bc-item{color:var(--t3);cursor:pointer;transition:color 0.2s}.bc-item:hover{color:var(--t2)}.bc-item.active{color:var(--t1);cursor:default}
+.bc-sep{color:var(--b3);font-size:8px}
+
+/* ── OPTION ROWS ── */
+.olist{display:flex;flex-direction:column;gap:1px;background:var(--b1);border:1px solid var(--b1);margin-bottom:1.5rem}
+.orow{display:flex;align-items:center;justify-content:space-between;padding:1.2rem 1.75rem;background:var(--s1);cursor:pointer;transition:background 0.2s;position:relative}
+.orow::before{content:'';position:absolute;left:0;top:0;bottom:0;width:1px;background:var(--gold);transform:scaleY(0);transform-origin:top;transition:transform 0.3s}
+.orow:hover{background:var(--s2)}.orow:hover::before{transform:scaleY(1)}
+.orow.selected{background:var(--s2)}.orow.selected::before{transform:scaleY(1)}
+.orow.disabled{opacity:0.35;cursor:not-allowed;pointer-events:none}
+.oleft{display:flex;flex-direction:column;gap:4px}
+.oname{font-size:15px;font-weight:400;color:var(--t1);letter-spacing:0.01em}
+.odesc{font-size:13px;color:var(--t3);letter-spacing:0.02em}
+.oright{display:flex;align-items:center;gap:14px;flex-shrink:0}
+.odelta{font-family:'Cormorant Garamond',serif;font-size:19px;color:var(--t2)}
+.ochk{width:14px;height:14px;border-radius:50%;border:1px solid var(--b3);transition:all 0.25s;flex-shrink:0}
+.orow.selected .ochk{background:var(--gold);border-color:var(--gold)}
+
+/* ── SUB OPTION (ceramic color) ── */
+.sub-olist{display:flex;flex-direction:column;gap:1px;background:var(--b2);border:1px solid var(--b2);margin-bottom:1.5rem;margin-left:1.5rem}
+.sub-orow{display:flex;align-items:center;justify-content:space-between;padding:0.9rem 1.5rem;background:var(--s2);cursor:pointer;transition:background 0.2s;position:relative}
+.sub-orow::before{content:'';position:absolute;left:0;top:0;bottom:0;width:1px;background:var(--gold);transform:scaleY(0);transform-origin:top;transition:transform 0.3s}
+.sub-orow:hover{background:var(--s3)}.sub-orow:hover::before{transform:scaleY(1)}
+.sub-orow.selected{background:var(--s3)}.sub-orow.selected::before{transform:scaleY(1)}
+.sub-name{font-size:14px;font-weight:400;color:var(--t1)}
+.sub-dot{width:12px;height:12px;border-radius:50%;border:1px solid var(--b3);flex-shrink:0;transition:all 0.25s}
+.sub-orow.selected .sub-dot{border-color:var(--gold)}
+.dot-bronze{background:#A0622A}
+.dot-black{background:#1A1A1A;border-color:var(--b3) !important}
+.dot-white{background:#E8E4DC}
+.dot-polished{background:linear-gradient(135deg,#D0CCC8,#F0ECEC,#B0ACA8)}
+.dot-gold{background:linear-gradient(135deg,#C8A050,#E0C070,#B09040)}
+.dot-blue{background:linear-gradient(135deg,#3050A0,#5080D0,#204090)}
+.dot-purple{background:linear-gradient(135deg,#702090,#A040C0,#601880)}
+
+/* ── BESPOKE TRIGGER ── */
+.bbar{display:flex;align-items:center;justify-content:space-between;padding:1.5rem 1.75rem;border:1px solid var(--b2);cursor:pointer;transition:border-color 0.3s,background 0.3s;margin-bottom:1.75rem;position:relative}
+.bbar::before{content:'';position:absolute;left:0;top:0;bottom:0;width:1px;background:var(--gold);transform:scaleY(0);transform-origin:top;transition:transform 0.3s}
+.bbar:hover{border-color:var(--b3)}.bbar:hover::before{transform:scaleY(1)}
+.btitle{font-size:15px;font-weight:500;color:var(--t1);margin-bottom:4px}.bsub{font-size:12px;color:var(--t3);letter-spacing:0.05em}
+.barr{font-size:12px;letter-spacing:0.14em;text-transform:uppercase;color:var(--gold)}
+
+/* ── NAV ── */
+.nav{display:flex;align-items:center;justify-content:space-between;padding-top:2rem;border-top:1px solid var(--b1);margin-top:1.5rem}
+.btn-back{font-family:'Montserrat',sans-serif;font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:var(--t3);background:none;border:none;cursor:pointer;padding:10px 0;transition:color 0.25s}
+.btn-back:hover{color:var(--t2)}
+.btn-next{font-family:'Montserrat',sans-serif;font-size:11px;letter-spacing:0.18em;text-transform:uppercase;padding:14px 40px;background:transparent;border:1px solid var(--gold);color:var(--gold);cursor:pointer;transition:background 0.3s,color 0.3s}
+.btn-next:hover{background:var(--gold);color:var(--bg)}
+.btn-next:disabled{border-color:var(--b2);color:var(--t3);cursor:not-allowed;background:transparent}
+
+/* ── REVIEW BLOCK ── */
+.sblock{border:1px solid var(--b2);margin-bottom:2.5rem;position:relative;overflow:hidden}
+.sblock::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent)}
+.shdr{padding:2rem;border-bottom:1px solid var(--b1)}
+.seyebrow{font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:var(--t3);margin-bottom:8px}
+.smodel{font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:300;color:var(--t1)}
+.srow{display:flex;justify-content:space-between;align-items:center;padding:12px 2rem;border-bottom:1px solid var(--b1);font-size:14px}
+.srow:last-child{border-bottom:none}
+.srn{color:var(--t3);letter-spacing:0.04em}.srv{color:var(--t1)}
+.stotal{display:flex;justify-content:space-between;align-items:baseline;padding:1.5rem 2rem;border-top:1px solid var(--b2);background:var(--s1)}
+.stl{font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:var(--t3)}
+.stp{font-family:'Cormorant Garamond',serif;font-size:36px;font-weight:300;color:var(--t1)}
+
+/* ── CTA ── */
+.cta-area{text-align:center;padding:2rem 0 1rem}
+.cta-btn{font-family:'Montserrat',sans-serif;display:inline-block;padding:16px 60px;background:var(--gold);color:var(--bg);font-size:11px;letter-spacing:0.2em;text-transform:uppercase;border:none;cursor:pointer;transition:opacity 0.3s;margin-bottom:16px}
+.cta-btn:hover{opacity:0.85}
+.cta-note{font-size:13px;color:var(--t3);max-width:380px;margin:0 auto;line-height:1.9;font-style:italic}
+
+/* ── FORMS ── */
+.ifield{display:flex;flex-direction:column;gap:6px;margin-bottom:12px}
+.ifield label{font-size:11px;letter-spacing:0.16em;text-transform:uppercase;color:var(--t3)}
+.ifield input,.ifield select,.ifield textarea{font-family:'Montserrat',sans-serif;font-size:14px;font-weight:400;padding:13px 14px;background:var(--s1);border:1px solid var(--b2);color:var(--t1);outline:none;transition:border-color 0.25s;width:100%;border-radius:0}
+.ifield input::placeholder,.ifield textarea::placeholder{color:var(--t3)}
+.ifield input:focus,.ifield select:focus,.ifield textarea:focus{border-color:var(--gold2)}
+.ifield select{appearance:none;cursor:pointer;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='5'%3E%3Cpath d='M0 0l4 5 4-5z' fill='%23787470'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center}
+.ifield select option{background:var(--s2);color:var(--t1)}
+.ifield textarea{resize:vertical;min-height:80px;line-height:1.7}
+.frow{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.form-section-label{font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:var(--t3);margin:1.75rem 0 1rem;padding-top:1.75rem;border-top:1px solid var(--b1)}
+
+/* ── BSI ── */
+.bsi{padding:1.5rem 1.75rem;border:1px solid var(--b2);margin-bottom:2rem;position:relative}
+.bsi::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,var(--gold),transparent)}
+.bsi-ey{font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:var(--t3);margin-bottom:10px}
+.bsi-m{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:300;color:var(--t1);margin-bottom:6px}
+.bsi-s{font-size:13px;color:var(--t2);line-height:1.8}
+.bsi-p{font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:300;color:var(--gold);margin-top:12px}
+
+/* ── DEPOSIT ── */
+.deposit-block{border:1px solid var(--b2);margin-bottom:2rem;position:relative;overflow:hidden}
+.deposit-block::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent)}
+.deposit-top{padding:2rem;border-bottom:1px solid var(--b1)}
+.deposit-eyebrow{font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:var(--t3);margin-bottom:8px}
+.deposit-title{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:300;color:var(--t1);margin-bottom:12px}
+.deposit-desc{font-size:14px;color:var(--t2);line-height:1.85}
+.deposit-amounts{display:grid;grid-template-columns:1fr 1fr;border-top:1px solid var(--b1)}
+.dep-cell{padding:1.5rem 2rem;display:flex;flex-direction:column;gap:6px}
+.dep-cell:first-child{border-right:1px solid var(--b1)}
+.dep-cell-label{font-size:11px;letter-spacing:0.16em;text-transform:uppercase;color:var(--t3)}
+.dep-cell-value{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:300;color:var(--gold)}
+.dep-cell-sub{font-size:13px;color:var(--t3)}
+.payment-form{border:1px solid var(--b1);padding:1.75rem;margin-bottom:2rem}
+.payment-eyebrow{font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:var(--t3);margin-bottom:1.25rem}
+.card-field{display:flex;flex-direction:column;gap:6px;margin-bottom:12px}
+.card-field label{font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:var(--t3)}
+.card-input{font-family:'Montserrat',sans-serif;font-size:14px;font-weight:400;padding:13px 14px;background:var(--s1);border:1px solid var(--b2);color:var(--t1);outline:none;transition:border-color 0.25s;width:100%;border-radius:0}
+.card-input:focus{border-color:var(--gold2)}.card-input::placeholder{color:var(--t3)}
+.card-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.secure-note{font-size:12px;color:var(--t3);margin-top:12px;font-style:italic}
+
+/* ── CONFIRM ── */
+.confirm-screen{padding:3rem 0 2rem;text-align:center}
+.confirm-mark{width:48px;height:48px;border:1px solid var(--gold);margin:0 auto 2rem;display:flex;align-items:center;justify-content:center}
+.confirm-mark::before{content:'';width:14px;height:8px;border-left:1px solid var(--gold);border-bottom:1px solid var(--gold);transform:rotate(-45deg) translateY(-2px)}
+.confirm-title{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:300;color:var(--t1);margin-bottom:12px}
+.confirm-sub{font-size:14px;color:var(--t2);line-height:1.9;max-width:440px;margin:0 auto 2rem}
+.confirm-ref{font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:var(--t3);margin-bottom:8px}
+.confirm-balance{font-size:13px;color:var(--t3);font-style:italic;margin-bottom:2.5rem}
+
+/* ── TIPS NOTE ── */
+.tips-note{border:1px solid var(--b2);padding:1.5rem 1.75rem;margin-bottom:1.75rem;position:relative}
+.tips-note::before{content:'';position:absolute;top:0;left:0;bottom:0;width:1px;background:var(--gold)}
+.tips-note-title{font-size:14px;color:var(--t1);margin-bottom:6px;font-weight:500}
+.tips-note-body{font-size:13px;color:var(--t3);line-height:1.8;font-style:italic}
+
+/* ── BRAND PILLS ── */
+.brand-pills{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:2rem}
+.bp{padding:9px 18px;border:1px solid var(--b2);font-size:13px;color:var(--t2);cursor:pointer;transition:all 0.2s;letter-spacing:0.04em}
+.bp:hover{border-color:var(--b3);color:var(--t1)}.bp.selected{border-color:var(--gold);color:var(--gold)}
+
+/* ── FOOTER ── */
+.ftr{padding:1.5rem 0;border-top:1px solid var(--b1);margin-top:auto;display:flex;align-items:center;justify-content:space-between}
+.ftr-left,.ftr-right{font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:var(--t3)}
+
+/* ── TRANSITION ── */
+.step-content{animation:stepIn 0.5s cubic-bezier(0.22,1,0.36,1) forwards}
+@keyframes stepIn{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+
+/* ── INFO PILL ── */
+.info-pill{display:inline-flex;align-items:center;gap:6px;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;padding:5px 12px;border:1px solid var(--b2);color:var(--t3);margin-bottom:1rem}
+</style>
+</head>
+<body>
+<div class="shell">
+
+<div class="hdr">
+  <div class="wordmark">GAMARAY</div>
+  <div class="hdr-right">Exhaust Commission</div>
+</div>
+
+<div style="padding:2.5rem 0">
+  <div class="step-rail" id="stepRail"></div>
+  <div class="price-panel" id="pricePanel">
+    <div class="price-label" id="priceLabel">Starting from</div>
+    <div class="price-value" id="priceValue">—</div>
+  </div>
+  <div id="stepContent"></div>
+</div>
+
+<div class="ftr">
+  <div class="ftr-left">San Antonio, Texas</div>
+  <div class="ftr-right">By appointment</div>
+</div>
+
+</div>
+
+<script>
+const DEPOSIT = 750;
+
+// ── PRICING DATABASE ─────────────────────────────────────────────────────────
+// Keys map to priceGroup on each variant
+// ss: stainless catback | ti: titanium catback
+// cat: catalytic converter upgrade | headers: catless headers
+// ceramic_full: ceramic full system add-on
+const PRICE_GROUPS = {
+  // ── Architecture A: Separate cats (headers+cats as distinct upgrade) ──
+  '991_1_carrera': { arch:'A', ss:4200, ti:null,  headersPrice:2300, catAdder:1000 },
+  '991_gt3':       { arch:'A', ss:4350, ti:null,  headersPrice:2700, catAdder:500  },
+  '992_gt3':       { arch:'A', ss:5100, ti:null,  headersPrice:3800, catAdder:600  },
+  '997_2_carrera': { arch:'A', ss:4000, ti:null,  headersPrice:2900, catAdder:500  },
+  '997_gt3':       { arch:'A', ss:4100, ti:null,  headersPrice:2400, catAdder:600  },
+  // ── Architecture B: Cats integrated into catback ──
+  '991_turbo':     { arch:'B', ss:4800, ti:6200,  headersPrice:2300, catAdder:1000 },
+  '991_2_carrera': { arch:'B', ss:4800, ti:6200,  headersPrice:2300, catAdder:1000 },
+  '997_1_carrera': { arch:'B', ss:4300, ti:6500,  headersPrice:2100, catAdder:1200 },
+  '997_1_turbo':   { arch:'B', ss:4000, ti:6900,  headersPrice:2200, catAdder:1200 },
+  '997_2_turbo':   { arch:'B', ss:4000, ti:6900,  headersPrice:2200, catAdder:1200 },
+  // ── Architecture C: Fully independent components ──
+  '992_carrera':   { arch:'C', ss:4200, ti:5730,  headersPrice:2050, catlessPrice:1950, catHighFlowAdder:150 },
+};
+
+// ── PLATFORM DATA ─────────────────────────────────────────────────────────────
+const PLATFORM = {
+  '911': {
+    label:'911', sub:'Porsche 911',
+    generations:[
+      { id:'992', label:'992', years:'2019 — present', variants:[
+        {id:'992c',    name:'Carrera',       tag:'Base',      priceGroup:'992_carrera'},
+        {id:'992cs',   name:'Carrera S',     tag:'Sport',     priceGroup:'992_carrera'},
+        {id:'992ct',   name:'Carrera T',     tag:'Touring',   priceGroup:'992_carrera'},
+        {id:'992cgts', name:'Carrera GTS',   tag:'GTS',       priceGroup:'992_carrera'},
+        {id:'992c4',   name:'Carrera 4',     tag:'AWD',       priceGroup:'992_carrera'},
+        {id:'992c4s',  name:'Carrera 4S',    tag:'AWD Sport', priceGroup:'992_carrera'},
+        {id:'992c4gts',name:'Carrera 4 GTS', tag:'AWD GTS',   priceGroup:'992_carrera'},
+        {id:'992tg4',  name:'Targa 4',       tag:'Targa',     priceGroup:'992_carrera'},
+        {id:'992tg4s', name:'Targa 4S',      tag:'Targa',     priceGroup:'992_carrera'},
+        {id:'992tg4g', name:'Targa 4 GTS',   tag:'Targa GTS', priceGroup:'992_carrera'},
+        {id:'992ts',   name:'Turbo S',       tag:'Flagship',  priceGroup:'992_carrera'},
+        {id:'992spc',  name:'Sport Classic', tag:'Heritage',  priceGroup:'992_carrera'},
+        {id:'992dak',  name:'Dakar',         tag:'Rally',     priceGroup:'992_carrera'},
+        {id:'992gt3',  name:'GT3',           tag:'Track',     priceGroup:'992_gt3'},
+        {id:'992gt3r', name:'GT3 RS',        tag:'Track RS',  priceGroup:'992_gt3', onePiece:true},
+      ]},
+      { id:'991.2', label:'991.2', years:'2016 — 2019', variants:[
+        {id:'991_2c',    name:'Carrera',     tag:'Base',      priceGroup:'991_2_carrera'},
+        {id:'991_2cs',   name:'Carrera S',   tag:'Sport',     priceGroup:'991_2_carrera'},
+        {id:'991_2ct',   name:'Carrera T',   tag:'Touring',   priceGroup:'991_2_carrera'},
+        {id:'991_2cgts', name:'Carrera GTS', tag:'GTS',       priceGroup:'991_2_carrera'},
+        {id:'991_2c4s',  name:'Carrera 4S',  tag:'AWD Sport', priceGroup:'991_2_carrera'},
+        {id:'991_2r',    name:'R',           tag:'Collector', priceGroup:'991_2_carrera'},
+        {id:'991_2gt3',  name:'GT3',         tag:'Track',     priceGroup:'991_gt3'},
+        {id:'991_2gt3r', name:'GT3 RS',      tag:'Track RS',  priceGroup:'991_gt3', onePiece:true},
+        {id:'991_2ts',   name:'Turbo S',     tag:'Flagship',  priceGroup:'991_turbo'},
+      ]},
+      { id:'991.1', label:'991.1', years:'2012 — 2016', variants:[
+        {id:'991_1c',    name:'Carrera',     tag:'Base',      priceGroup:'991_1_carrera', onePiece:true},
+        {id:'991_1cs',   name:'Carrera S',   tag:'Sport',     priceGroup:'991_1_carrera', onePiece:true},
+        {id:'991_1cgts', name:'Carrera GTS', tag:'GTS',       priceGroup:'991_1_carrera'},
+        {id:'991_1c4s',  name:'Carrera 4S',  tag:'AWD Sport', priceGroup:'991_1_carrera'},
+        {id:'991_1gt3',  name:'GT3',         tag:'Track',     priceGroup:'991_gt3'},
+        {id:'991_1gt3r', name:'GT3 RS',      tag:'Track RS',  priceGroup:'991_gt3', onePiece:true},
+        {id:'991_1ts',   name:'Turbo S',     tag:'Flagship',  priceGroup:'991_turbo'},
+      ]},
+      { id:'997.2', label:'997.2', years:'2009 — 2012', variants:[
+        {id:'997_2c',    name:'Carrera',     tag:'Base',      priceGroup:'997_2_carrera', onePiece:true},
+        {id:'997_2cs',   name:'Carrera S',   tag:'Sport',     priceGroup:'997_2_carrera', onePiece:true},
+        {id:'997_2cgts', name:'Carrera GTS', tag:'GTS',       priceGroup:'997_2_carrera'},
+        {id:'997_2gt3',  name:'GT3',         tag:'Track',     priceGroup:'997_gt3'},
+        {id:'997_2gt3r', name:'GT3 RS',      tag:'Track RS',  priceGroup:'997_gt3', onePiece:true},
+        {id:'997_2ts',   name:'Turbo S',     tag:'Flagship',  priceGroup:'997_2_turbo'},
+      ]},
+      { id:'997.1', label:'997.1', years:'2005 — 2008', variants:[
+        {id:'997_1c',    name:'Carrera',     tag:'Base',      priceGroup:'997_1_carrera'},
+        {id:'997_1cs',   name:'Carrera S',   tag:'Sport',     priceGroup:'997_1_carrera'},
+        {id:'997_1gt3',  name:'GT3',         tag:'Track',     priceGroup:'997_gt3'},
+        {id:'997_1gt3r', name:'GT3 RS',      tag:'Track RS',  priceGroup:'997_gt3', onePiece:true},
+        {id:'997_1ts',   name:'Turbo S',     tag:'Flagship',  priceGroup:'997_1_turbo'},
+      ]},
+      { id:'classic', label:'Classic', years:'1963 — 1998', variants:[
+        {id:'930',   name:'930 Turbo',          tag:'1975–1989', priceGroup:null},
+        {id:'964',   name:'964 Carrera',         tag:'1989–1994', priceGroup:null},
+        {id:'964rs', name:'964 RS / RS America', tag:'Track',     priceGroup:null},
+        {id:'993',   name:'993 Carrera',         tag:'1994–1998', priceGroup:null},
+        {id:'993ts', name:'993 Turbo S',         tag:'Flagship',  priceGroup:null},
+        {id:'901',   name:'901 / 911 Original',  tag:'1963–1973', priceGroup:null},
+      ]},
+    ]
+  },
+};
+
+// ── SYSTEM TYPES ──────────────────────────────────────────────────────────────
+const SYSTEM_TYPES = [
+  {id:'catback',  name:'Cat-Back System',           desc:'From the catalytic converter to the tips'},
+  {id:'headers',  name:'Headers Only',              desc:'Up-pipe headers without the cat-back'},
+  {id:'both',     name:'Headers + Cat-Back',        desc:'Full system, headers through tips'},
+];
+
+// ── CATALYTIC CONVERTERS ──────────────────────────────────────────────────────
+const CAT_OPTIONS = [
+  {id:'oem',      name:'OEM Catalytic Converters',  desc:'Retain factory cats, no additional cost',           delta:0},
+  {id:'cat100',   name:'100-Cell High-Flow Cats',   desc:'Significant flow improvement, emissions compliant',  delta:null}, // from price group
+  {id:'cat200',   name:'200-Cell High-Flow Cats',   desc:'Balanced performance and compliance',                 delta:null},
+  {id:'cat400',   name:'400-Cell Sport Cats',       desc:'Street-optimized, close to OEM flow',               delta:null},
+  {id:'catless',  name:'Catless Headers',           desc:'Maximum flow, off-road / track use only',           delta:null},
+];
+
+// ── VALVES ────────────────────────────────────────────────────────────────────
+const VALVES = [
+  {id:'fixed', name:'Fixed System',          desc:'Uninterrupted flow, constant character',        delta:0},
+  {id:'valve', name:'Active Valve System',   desc:'Sport / Comfort mode, switchable acoustics',    delta:1000},
+];
+
+// ── FINISHES ──────────────────────────────────────────────────────────────────
+const FINISHES_SS = [
+  {id:'ss_polished',  name:'Polished Silver',     desc:'Classic mirror finish, natural stainless',   delta:0,   dot:'dot-polished'},
+  {id:'ss_gold',      name:'Anodized Gold',        desc:'Distinctive warm tone — catback only',       delta:320, dot:'dot-gold'},
+];
+
+const FINISHES_SS_CERAMIC_COLORS = [
+  {id:'bronze', name:'Bronze',  dot:'dot-bronze'},
+  {id:'black',  name:'Black',   dot:'dot-black'},
+  {id:'white',  name:'White',   dot:'dot-white'},
+];
+
+const FINISHES_TI = [
+  {id:'ti_polished', name:'Polished Silver', desc:'Clean titanium, natural high-polish',           delta:0, dot:'dot-polished'},
+  {id:'ti_gold',     name:'Gold',            desc:'Heat-treated warm tone — visual only',           delta:0, dot:'dot-gold'},
+  {id:'ti_blue',     name:'Blue',            desc:'Treated iridescent blue — visual only',          delta:0, dot:'dot-blue'},
+  {id:'ti_purple',   name:'Purple',          desc:'Deep violet, heat-treated — visual only',        delta:0, dot:'dot-purple'},
+];
+
+// ── TIPS ──────────────────────────────────────────────────────────────────────
+const TIPS = [
+  {id:'standard',  name:'GAMARAY Signature Tips', desc:'Included, exact spec confirmed post-deposit', delta:0},
+  {id:'custom',    name:'Customized Tips',         desc:'Select from our full catalogue after deposit — extra cost applied on commission', delta:0},
+];
+
+// ── STEPS ─────────────────────────────────────────────────────────────────────
+const STEPS = ['Platform','Material','System','Finish','Tips','Review','Details','Deposit'];
+
+// ── STATE ─────────────────────────────────────────────────────────────────────
+let S = {
+  step:0, platformStep:'series',
+  series:null, generation:null, variant:null,
+  material:'ss',
+  // Architecture A/B scope: 'catback'|'h_cb'|'h_only' (A) or 'catback'|'headers'|'cb_headers' (B)
+  systemType:'catback',
+  // Architecture C independent flags
+  cHasCatback:true, cHasHeaders:false, cHasCats:false,
+  // Cat selection: 'catless'|'cat100'|'cat200'|'cat300'|'cat400'
+  catOption:'catless',
+  // Ceramic toggles (true = included, deselect for -$510 discount)
+  ceramicCatback:true, ceramicHeaders:true, ceramicCats:false,
+  ceramicColor:'bronze',
+  finish:'ss_polished',
+  valve:'active',
+  tips:'standard',
+  bespoke:false, brand:null,
+};
+let fd = {year:'',gen:'',exhaust:'',use:'',notes:'',name:'',contact:''};
+
+// ── PRICE CALC ────────────────────────────────────────────────────────────────
+function pg() {
+  if (!S.variant || !S.variant.priceGroup) return null;
+  return PRICE_GROUPS[S.variant.priceGroup] || null;
+}
+
+function totalPrice() {
+  const g = pg(); if (!g) return null;
+  const isTi = S.material === 'ti';
+  const tiBase = g.ti != null ? g.ti : g.ss + 1400;
+  let base = isTi ? tiBase : g.ss;
+  const catHighFlow = S.catOption !== 'catless';
+
+  if (g.arch === 'A') {
+    if (S.systemType === 'h_cb') {
+      base += g.headersPrice;
+      if (catHighFlow) base += g.catAdder;
+    } else if (S.systemType === 'h_only') {
+      base = (isTi ? tiBase : g.ss) - g.ss + g.headersPrice;
+      if (catHighFlow) base += g.catAdder;
+    }
+    // 'catback': no change
+
+  } else if (g.arch === 'B') {
+    if (S.systemType === 'headers') {
+      base = g.headersPrice + (isTi ? tiBase - g.ss : 0);
+    } else if (S.systemType === 'cb_headers') {
+      base += g.headersPrice;
+    }
+    if ((S.systemType === 'catback' || S.systemType === 'cb_headers') && catHighFlow) {
+      base += g.catAdder;
+    }
+
+  } else if (g.arch === 'C') {
+    base = 0;
+    if (S.cHasCatback) base += isTi ? tiBase : g.ss;
+    if (S.cHasHeaders) base += g.headersPrice;
+    if (S.cHasCats) { base += g.catlessPrice; if (catHighFlow) base += g.catHighFlowAdder; }
+  }
+
+  // Valve
+  if (S.valve === 'fixed') base -= 200;
+
+  // Ceramic (SS only — ceramic is INCLUDED by default, deselect = discount)
+  if (!isTi) {
+    if (g.arch === 'A') {
+      const hasCB = S.systemType === 'catback' || S.systemType === 'h_cb';
+      const hasH  = S.systemType === 'h_cb' || S.systemType === 'h_only';
+      let removed = 0, total = 0;
+      if (hasCB) { total++; if (!S.ceramicCatback) removed++; }
+      if (hasH)  { total++; if (!S.ceramicHeaders) removed++; total++; if (!S.ceramicCats) removed++; }
+      if (removed === total && total > 0) base -= 1200;
+      else base -= removed * 510;
+
+    } else if (g.arch === 'B') {
+      const hasCB = S.systemType === 'catback' || S.systemType === 'cb_headers';
+      if (hasCB && !S.ceramicCatback) base -= 510;
+
+    } else if (g.arch === 'C') {
+      const hasCB = S.cHasCatback;
+      const hasH  = S.cHasHeaders;
+      const hasCt = S.cHasCats && catHighFlow;
+      let removed = 0, total = 0;
+      if (hasCB) { total++; if (!S.ceramicCatback) removed++; }
+      if (hasH)  { total++; if (!S.ceramicHeaders) removed++; }
+      if (hasCt) { total++; if (!S.ceramicCats) removed++; }
+      if (removed === total && total > 0) base -= 1200;
+      else base -= removed * 510;
+    }
+
+    // Surface finish delta (Anodized Gold) — only when NO ceramic is active
+    const anyCeramicOn = (g.arch === 'A' && (
+      ((S.systemType==='catback'||S.systemType==='h_cb') && S.ceramicCatback) ||
+      ((S.systemType==='h_cb'||S.systemType==='h_only') && (S.ceramicHeaders || S.ceramicCats))
+    )) || (g.arch === 'B' && S.ceramicCatback && (S.systemType==='catback'||S.systemType==='cb_headers')) ||
+    (g.arch === 'C' && ((S.cHasCatback&&S.ceramicCatback)||(S.cHasHeaders&&S.ceramicHeaders)||(S.cHasCats&&catHighFlow&&S.ceramicCats)));
+    if (!anyCeramicOn) {
+      const f = FINISHES_SS.find(x => x.id === S.finish);
+      if (f) base += f.delta;
+    }
+  }
+
+  return base;
+}
+
+function fmt(n) { return n == null ? '—' : '$' + n.toLocaleString(); }
+
+function fullLabel() {
+  if (!S.series) return '';
+  const parts = [PLATFORM[S.series].sub];
+  if (S.generation) parts.push(S.generation.label);
+  if (S.variant)    parts.push(S.variant.name);
+  return parts.join(' · ');
+}
+
+// ── RAIL ──────────────────────────────────────────────────────────────────────
+function renderRail() {
+  const rail = document.getElementById('stepRail');
+  if (S.bespoke) { rail.innerHTML='<span style="font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--t3)">Bespoke Application</span>'; return; }
+  rail.innerHTML = STEPS.map((s,i) => {
+    const cls = i < S.step ? 'done' : i === S.step ? 'active' : '';
+    const num = `<span class="sr-item ${cls}"><span class="sr-num">${i+1}</span><span class="sr-label">${s}</span></span>`;
+    const line = i < STEPS.length-1 ? `<div class="sr-line"><div class="sr-line-fill" style="width:${i<S.step?100:0}%"></div></div>` : '';
+    return num + line;
+  }).join('');
+}
+
+// ── PRICE PANEL ───────────────────────────────────────────────────────────────
+function updatePrice() {
+  const panel = document.getElementById('pricePanel');
+  const label = document.getElementById('priceLabel');
+  const val   = document.getElementById('priceValue');
+  if (S.bespoke || S.step >= 7) { panel.style.display='none'; return; }
+  panel.style.display = 'flex';
+  const g = pg();
+  if (!S.variant || !g) {
+    label.textContent = 'Signature Exhaust Starting From';
+    if (S.generation) {
+      const prices = S.generation.variants.filter(v=>v.priceGroup).map(v=>{
+        const p=PRICE_GROUPS[v.priceGroup]; return p?p.ss:null;
+      }).filter(Boolean);
+      val.textContent = prices.length ? 'From '+fmt(Math.min(...prices)) : '—';
+    } else if (S.series) {
+      const all = PLATFORM[S.series].generations.flatMap(g=>g.variants).filter(v=>v.priceGroup).map(v=>{
+        const p=PRICE_GROUPS[v.priceGroup]; return p?p.ss:null;
+      }).filter(Boolean);
+      val.textContent = all.length ? 'From '+fmt(Math.min(...all)) : '—';
+    } else { val.textContent = '—'; }
+  } else if (S.step >= 5) {
+    label.textContent = 'Total investment';
+    val.textContent = fmt(totalPrice());
+  } else {
+    label.textContent = 'Signature Exhaust Starting From';
+    val.classList.add('fade');
+    setTimeout(() => { val.textContent = fmt(totalPrice()); val.classList.remove('fade'); }, 180);
+  }
+}
+
+// ── RENDER ────────────────────────────────────────────────────────────────────
+function setStep(n) { S.step=n; renderRail(); updatePrice(); renderContent(); }
+
+function renderContent() {
+  const el = document.getElementById('stepContent');
+  let html = '';
+  if (S.bespoke)        html = S.step===99 ? rBespokeConfirm() : rBespoke();
+  else if (S.step===0)  html = rPlatform();
+  else if (S.step===1)  html = rMaterial();
+  else if (S.step===2)  html = rSystem();
+  else if (S.step===3)  html = rFinish();
+  else if (S.step===4)  html = rTips();
+  else if (S.step===5)  html = rReview();
+  else if (S.step===6)  html = rDetails();
+  else if (S.step===7)  html = rDeposit();
+  else if (S.step===8)  html = rConfirm();
+  el.innerHTML = html;
+  el.classList.remove('step-content'); void el.offsetWidth; el.classList.add('step-content');
+  bind();
+}
+
+// ── PLATFORM ──────────────────────────────────────────────────────────────────
+function rPlatform() {
+  if (S.platformStep==='series')     return rSeries();
+  if (S.platformStep==='generation') return rGeneration();
+  if (S.platformStep==='variant')    return rVariant();
+}
+
+function rBreadcrumb() {
+  const parts = [];
+  if (S.series) parts.push(`<span class="bc-item" onclick="goSeries()">${PLATFORM[S.series].label}</span>`);
+  if (S.generation) { parts.push(`<span class="bc-sep">›</span>`); parts.push(`<span class="bc-item" onclick="goGeneration()">${S.generation.label}</span>`); }
+  if (S.variant) { parts.push(`<span class="bc-sep">›</span>`); parts.push(`<span class="bc-item active">${S.variant.name}</span>`); }
+  return parts.length ? `<div class="breadcrumb">${parts.join('')}</div>` : '';
+}
+
+function rSeries() {
+  const cards = Object.entries(PLATFORM).map(([key,p]) => `
+    <div class="series-card" data-series="${key}">
+      <div>
+        <span class="series-eyebrow">${p.sub}</span>
+        <div class="series-name">${p.label}</div>
+        <div class="series-sub">Begin configuration</div>
+      </div>
+      <div class="series-arrow" style="position:static;opacity:0.6;font-size:20px;margin-left:auto">→</div>
+    </div>`).join('');
+  return `
+    <span class="sec-label">Select your platform</span>
+    <div class="series-grid">${cards}</div>
+    <div class="bbar" id="bespoke-trigger">
+      <div><div class="btitle">Bespoke Applications</div><div class="bsub">Ferrari · Lamborghini · BMW · Mercedes — select commissions</div></div>
+      <div class="barr">Inquire →</div>
+    </div>
+    <div class="nav"><span></span><button class="btn-next" disabled>Continue</button></div>`;
+}
+
+function rGeneration() {
+  const p = PLATFORM[S.series];
+  const cards = p.generations.map(g => `
+    <div class="gen-card ${S.generation&&S.generation.id===g.id?'selected':''}" data-gen="${g.id}">
+      <div class="gen-name">${g.label}</div>
+      <div class="gen-years">${g.years}</div>
+    </div>`).join('');
+  return `
+    ${rBreadcrumb()}
+    <span class="sec-label">${p.sub} — Select generation</span>
+    <div class="gen-grid" style="margin-top:1rem">${cards}</div>
+    <div class="nav">
+      <button class="btn-back" onclick="goSeries()">← Back</button>
+      <button class="btn-next" id="btnGen" ${!S.generation?'disabled':''} onclick="goVariant()">Continue</button>
+    </div>`;
+}
+
+function rVariant() {
+  const rows = S.generation.variants.map(v => `
+    <div class="vc ${S.variant&&S.variant.id===v.id?'selected':''}" data-variant="${v.id}">
+      <div class="vc-left">
+        <div class="vc-name">${v.name}</div>
+        <div class="vc-tag">${v.tag}</div>
+      </div>
+      <div class="vc-right">
+        <div class="vc-price">${v.priceGroup ? 'From '+fmt(PRICE_GROUPS[v.priceGroup]?.ss) : 'Contact for pricing'}</div>
+        <div class="vc-dot"></div>
+      </div>
+    </div>`).join('');
+  return `
+    ${rBreadcrumb()}
+    <span class="sec-label">${PLATFORM[S.series].sub} ${S.generation.label} — Select variant</span>
+    <div class="variant-list" style="margin-top:1rem">${rows}</div>
+    <div class="nav">
+      <button class="btn-back" onclick="goGeneration()">← Back</button>
+      <button class="btn-next" id="btnVariant" ${!S.variant?'disabled':''} onclick="setStep(1)">Continue</button>
+    </div>`;
+}
+
+function goSeries()    { S.platformStep='series';     S.series=null; S.generation=null; S.variant=null; updatePrice(); renderContent(); }
+function goGeneration(){ S.platformStep='generation'; S.generation=null; S.variant=null; updatePrice(); renderContent(); }
+function goVariant()   { if (!S.generation) return; S.platformStep='variant'; updatePrice(); renderContent(); }
+
+// ── MATERIAL ──────────────────────────────────────────────────────────────────
+function rMaterial() {
+  const g = pg();
+  const mats = [
+    {id:'ss', name:'T304 Stainless Steel',   desc:'Enduring character — polished, coated, or anodized',  price: g?g.ss:null},
+    {id:'ti', name:'Titanium',               desc:'Lightweight — develops a natural heat-gradient patina', price: g?(g.ti != null ? g.ti : g.ss + 1400):null},
+  ];
+  const rows = mats.map(m => `
+    <div class="orow ${S.material===m.id?'selected':''}" data-key="material" data-val="${m.id}">
+      <div class="oleft">
+        <div class="oname">${m.name}</div>
+        <div class="odesc">${m.desc}</div>
+      </div>
+      <div class="oright">
+        <div class="odelta">${m.price!=null?fmt(m.price):'—'}</div>
+        <div class="ochk"></div>
+      </div>
+    </div>`).join('');
+  return `
+    <span class="sec-label">Select material</span>
+    <div class="olist" style="margin-top:1rem">${rows}</div>
+    <div class="nav">
+      <button class="btn-back" onclick="setStep(0)">← Back</button>
+      <button class="btn-next" onclick="setStep(2)">Continue</button>
+    </div>`;
+}
+
+// ── SYSTEM ────────────────────────────────────────────────────────────────────
+function autoSetCeramic() {
+  const g = pg(); if (!g) return;
+  if (g.arch === 'A') {
+    const hasCB = S.systemType === 'catback' || S.systemType === 'h_cb';
+    const hasH  = S.systemType === 'h_cb' || S.systemType === 'h_only';
+    if (hasCB) S.ceramicCatback = true;
+    if (hasH)  { S.ceramicHeaders = true; S.ceramicCats = true; }
+  } else if (g.arch === 'B') {
+    if (S.systemType === 'catback' || S.systemType === 'cb_headers') S.ceramicCatback = true;
+    if (S.systemType === 'headers') S.ceramicHeaders = true;
+  } else if (g.arch === 'C') {
+    if (S.cHasCatback) S.ceramicCatback = true;
+    if (S.cHasHeaders) S.ceramicHeaders = true;
+  }
+}
+
+function rSystem() {
+  const g = pg();
+  if (!g) return '<p style="color:var(--t3);padding:2rem">Select a platform first.</p>';
+
+  const arch = g.arch;
+  const catHighFlow = S.catOption !== 'catless';
+
+  // ── SCOPE OPTIONS ──
+  let scopeOptions = [];
+  if (arch === 'A') {
+    const hPrice = g.headersPrice ? ' (+'+fmt(g.headersPrice)+')' : '';
+    scopeOptions = [
+      {id:'catback', name:'Cat-Back System',                desc:'From the catalytic converter to the tips — headers not included'},
+      {id:'h_cb',    name:'Headers + Cats (with Cat-Back)', desc:'Full system — catback, headers, and cats together'+hPrice},
+      {id:'h_only',  name:'Headers + Cats (standalone)',    desc:'Headers and cats only — no catback'+' ('+fmt(g.headersPrice)+' standalone)'},
+    ];
+  } else if (arch === 'B') {
+    const hPrice = g.headersPrice ? ' (+'+fmt(g.headersPrice)+')' : '';
+    scopeOptions = [
+      {id:'catback',    name:'Catback System (Cat Integrated)', desc:'Cats are part of this assembly — catback includes catalytic converters'},
+      {id:'headers',    name:'Headers Only',                    desc:'Up-pipe headers standalone — no catback ('+fmt(g.headersPrice)+')'},
+      {id:'cb_headers', name:'Headers + Catback',               desc:'Full system — both catback and headers'+hPrice},
+    ];
+  } else if (arch === 'C') {
+    // Architecture C: independent toggles — handled separately below
+  }
+
+  const scopeRows = arch !== 'C' ? scopeOptions.map(t => `
+    <div class="orow ${S.systemType===t.id?'selected':''}" data-key="systemType" data-val="${t.id}">
+      <div class="oleft"><div class="oname">${t.name}</div><div class="odesc">${t.desc}</div></div>
+      <div class="oright"><div class="ochk"></div></div>
+    </div>`).join('') : '';
+
+  // Architecture C: checkbox-style toggles
+  const cScopeRows = arch === 'C' ? `
+    <div class="orow ${S.cHasCatback?'selected':''}" data-key="cHasCatback" data-val="toggle">
+      <div class="oleft"><div class="oname">Catback System</div><div class="odesc">Cat-back from converter to tips — ${fmt(g.ss)}</div></div>
+      <div class="oright"><div class="ochk"></div></div>
+    </div>
+    <div class="orow ${S.cHasHeaders?'selected':''}" data-key="cHasHeaders" data-val="toggle">
+      <div class="oleft"><div class="oname">Headers</div><div class="odesc">Up-pipe headers — ${fmt(g.headersPrice)} (ceramic included)</div></div>
+      <div class="oright"><div class="ochk"></div></div>
+    </div>
+    <div class="orow ${S.cHasCats?'selected':''}" data-key="cHasCats" data-val="toggle">
+      <div class="oleft"><div class="oname">Catalytic Converters</div><div class="odesc">Catless — ${fmt(g.catlessPrice)}</div></div>
+      <div class="oright"><div class="ochk"></div></div>
+    </div>` : '';
+
+  // ── CAT OPTIONS ──
+  const showCats = (arch === 'A' && (S.systemType === 'h_cb' || S.systemType === 'h_only')) ||
+                   (arch === 'B' && (S.systemType === 'catback' || S.systemType === 'cb_headers')) ||
+                   (arch === 'C' && S.cHasCats);
+
+  const catAdderAmt = arch === 'C' ? (g.catHighFlowAdder||0) : (g.catAdder||0);
+  const catAdderLabel = catAdderAmt ? '+'+fmt(catAdderAmt) : 'Included';
+
+  const catRows = showCats ? `
+    <span class="sub-label">Catalytic Converters</span>
+    <div class="olist">
+      <div class="orow ${S.catOption==='catless'?'selected':''}" data-key="catOption" data-val="catless">
+        <div class="oleft"><div class="oname">Catless</div><div class="odesc">Maximum flow — off-road / track use only</div></div>
+        <div class="oright"><div class="odelta">Included</div><div class="ochk"></div></div>
+      </div>
+      <div class="orow ${S.catOption==='cat100'?'selected':''}" data-key="catOption" data-val="cat100">
+        <div class="oleft"><div class="oname">100-Cell High-Flow</div><div class="odesc">Significant flow improvement, emissions compliant</div></div>
+        <div class="oright"><div class="odelta">${catAdderLabel}</div><div class="ochk"></div></div>
+      </div>
+      <div class="orow ${S.catOption==='cat200'?'selected':''}" data-key="catOption" data-val="cat200">
+        <div class="oleft"><div class="oname">200-Cell High-Flow</div><div class="odesc">Balanced performance and compliance</div></div>
+        <div class="oright"><div class="odelta">${catAdderLabel}</div><div class="ochk"></div></div>
+      </div>
+      <div class="orow ${S.catOption==='cat300'?'selected':''}" data-key="catOption" data-val="cat300">
+        <div class="oleft"><div class="oname">300-Cell High-Flow</div><div class="odesc">Street-optimized, excellent flow balance</div></div>
+        <div class="oright"><div class="odelta">${catAdderLabel}</div><div class="ochk"></div></div>
+      </div>
+      <div class="orow ${S.catOption==='cat400'?'selected':''}" data-key="catOption" data-val="cat400">
+        <div class="oleft"><div class="oname">400-Cell Sport Cats</div><div class="odesc">Close to OEM flow, street compliant</div></div>
+        <div class="oright"><div class="odelta">${catAdderLabel}</div><div class="ochk"></div></div>
+      </div>
+    </div>
+    <div class="tips-note" style="margin-top:.75rem;border-color:rgba(255,180,0,.25)">
+      <div class="tips-note-body" style="color:var(--t3);font-style:italic">⚠ Off-Road Use Only. Aftermarket catalytic converter modifications may not be street-legal in your state or country. Verify local emissions laws before use on public roads.</div>
+    </div>` : '';
+
+  // ── VALVE ──
+  const valveRows = `
+    <div class="orow ${S.valve==='active'?'selected':''}" data-key="valve" data-val="active">
+      <div class="oleft">
+        <div class="oname">Active Valve System <span style="font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);margin-left:8px">Signature</span></div>
+        <div class="odesc">Sport / Comfort mode — switchable acoustics</div>
+      </div>
+      <div class="oright"><div class="odelta">Included</div><div class="ochk"></div></div>
+    </div>
+    <div class="orow ${S.valve==='fixed'?'selected':''}" data-key="valve" data-val="fixed">
+      <div class="oleft">
+        <div class="oname">Fixed System</div>
+        <div class="odesc">Uninterrupted flow — constant character</div>
+      </div>
+      <div class="oright"><div class="odelta" style="color:#C06050">−$200</div><div class="ochk"></div></div>
+    </div>`;
+
+  const archNote = arch === 'B' ? `<div class="tips-note" style="margin-bottom:1.5rem"><div class="tips-note-title">Integrated assembly — cats included in catback</div><div class="tips-note-body">On this platform, the catalytic converters are part of the catback assembly. They are included with any configuration that includes the catback.</div></div>` : '';
+
+  return `
+    ${archNote}
+    <span class="sec-label">System scope</span>
+    <div class="olist" style="margin-top:1rem">
+      ${arch === 'C' ? cScopeRows : scopeRows}
+    </div>
+    ${catRows}
+    <span class="sub-label">Acoustic Profile</span>
+    <div class="olist">${valveRows}</div>
+    <div class="nav">
+      <button class="btn-back" onclick="setStep(1)">← Back</button>
+      <button class="btn-next" onclick="setStep(3)">Continue</button>
+    </div>`;
+}
+
+// ── FINISH ────────────────────────────────────────────────────────────────────
+function rFinish() {
+  const isTi = S.material === 'ti';
+
+  // Auto-correct finish state when switching materials
+  if (isTi && !FINISHES_TI.find(f=>f.id===S.finish))  { S.finish = 'ti_polished'; }
+  if (!isTi && !FINISHES_SS.find(f=>f.id===S.finish))  { S.finish = 'ss_polished'; }
+
+  // ── GAMARAY SIGNATURE NOTE ──
+  const sigNote = `
+    <div class="tips-note" style="margin-bottom:1.75rem;border-color:var(--gold)">
+      <div class="tips-note-title" style="color:var(--gold)">GAMARAY Signature Specification</div>
+      <div class="tips-note-body">${isTi ? 'Your titanium system develops a natural heat-gradient patina over time. Select your preferred finish and valve configuration below. Your total will update based on the final system configuration.' : 'Every GAMARAY stainless-steel exhaust system includes ceramic coating as part of our signature specification. This treatment is selected to improve thermal management, material protection, and long-term performance.<br><br>Ceramic coating may be omitted by selecting the uncoated option should you prefer the natural stainless-steel finish.<br><br>Choose your preferred finish and valve configuration below. Your total will update based on the final system configuration.'}</div>
+    </div>`;
+
+  if (isTi) {
+    // ── TITANIUM FINISHES ──
+    const rows = FINISHES_TI.map(f => `
+      <div class="orow ${S.finish===f.id?'selected':''}" data-key="finish" data-val="${f.id}">
+        <div class="oleft"><div class="oname">${f.name}</div><div class="odesc">${f.desc}</div></div>
+        <div class="oright">
+          <span class="${f.dot}" style="display:inline-block;width:14px;height:14px;border-radius:50%;flex-shrink:0"></span>
+          <div class="odelta">${f.delta>0?'+'+fmt(f.delta):'Included'}</div>
+          <div class="ochk"></div>
+        </div>
+      </div>`).join('');
+
+    return `
+      ${sigNote}
+      <span class="sec-label">Titanium finishes</span>
+      <div class="olist" style="margin-top:1rem">${rows}</div>
+      <div class="nav">
+        <button class="btn-back" onclick="setStep(2)">← Back</button>
+        <button class="btn-next" onclick="setStep(4)">Continue</button>
+      </div>`;
+  }
+
+  // ── STAINLESS STEEL — CERAMIC OPTIONS ──
+  const g2 = pg();
+  const arch = g2 ? g2.arch : 'A';
+
+  // Determine which ceramic components apply for this scope
+  const scopeHasCatback = arch==='A' ? (S.systemType==='catback'||S.systemType==='h_cb') :
+                          arch==='B' ? (S.systemType==='catback'||S.systemType==='cb_headers') :
+                          S.cHasCatback;
+  const scopeHasHeaders = arch==='A' ? (S.systemType==='h_cb'||S.systemType==='h_only') :
+                          arch==='B' ? (S.systemType==='headers'||S.systemType==='cb_headers') :
+                          S.cHasHeaders;
+  const scopeHasCats    = arch==='A' ? (S.systemType==='h_cb'||S.systemType==='h_only') :
+                          arch==='C' && S.cHasCats && S.catOption!=='catless';
+  // B arch: cats are baked into catback, no separate cats ceramic toggle
+
+  const ceramicRows2 = [
+    scopeHasCatback && {key:'ceramicCatback', val:S.ceramicCatback, label:'Catback Ceramic Coating', desc:'Ceramic coating on the catback system'},
+    scopeHasHeaders && {key:'ceramicHeaders', val:S.ceramicHeaders, label:'Headers Ceramic Coating',  desc:'Ceramic coating on headers'},
+    scopeHasCats    && {key:'ceramicCats',    val:S.ceramicCats,    label:'Cats Ceramic Coating',     desc:'Ceramic coating on catalytic converters'},
+  ].filter(Boolean).map(c => `
+    <div class="orow ${c.val?'selected':''}" data-key="${c.key}" data-val="${c.val?'false':'true'}">
+      <div class="oleft"><div class="oname">${c.label}</div><div class="odesc">${c.desc}</div></div>
+      <div class="oright">
+        <div class="odelta" style="${c.val?'':'color:#C06050'}">${c.val?'Included':'−'+fmt(510)}</div>
+        <div class="ochk"></div>
+      </div>
+    </div>`).join('');
+
+  const noCeramicActive = !scopeHasCatback || !S.ceramicCatback;
+  const ceramicColor2 = (scopeHasCatback&&S.ceramicCatback)||(scopeHasHeaders&&S.ceramicHeaders)||(scopeHasCats&&S.ceramicCats) ? `
+    <span class="sub-label">Ceramic Color</span>
+    <div class="sub-olist">
+      ${FINISHES_SS_CERAMIC_COLORS.map(col=>`
+      <div class="sub-orow ${S.ceramicColor===col.id?'selected':''}" data-key="ceramicColor" data-val="${col.id}">
+        <div class="sub-name">${col.name}</div>
+        <div class="sub-dot ${col.dot}"></div>
+      </div>`).join('')}
+    </div>` : '';
+
+  // Surface finish (Anodized Gold restricted to catback scope — G-2)
+  const catbackInScope = scopeHasCatback;
+  const anyCeramicOn2 = (scopeHasCatback&&S.ceramicCatback)||(scopeHasHeaders&&S.ceramicHeaders)||(scopeHasCats&&S.ceramicCats);
+  const ssRows2 = FINISHES_SS.map(f => {
+    const isGold = f.id === 'ss_gold';
+    const disabledByCeramic = anyCeramicOn2;
+    const disabledGold = isGold && !catbackInScope;
+    const disabled = disabledByCeramic || disabledGold;
+    const goldNote = isGold && !catbackInScope ? ' <span style="font-size:9px;letter-spacing:.08em;color:var(--t3);margin-left:6px;text-transform:uppercase">Catback only</span>' : '';
+    return `
+    <div class="orow ${!disabled && S.finish===f.id?'selected':''} ${disabled?'disabled':''}"
+      ${disabled?'':('data-key="finish" data-val="'+f.id+'"')}>
+      <div class="oleft">
+        <div class="oname">${f.name}${disabled&&disabledByCeramic?' <span style="font-size:9px;letter-spacing:.08em;color:var(--t3);margin-left:8px;text-transform:uppercase">n/a with ceramic</span>':goldNote}</div>
+        <div class="odesc">${disabled&&disabledByCeramic?'Not available when ceramic coating is selected':disabled&&disabledGold?'Requires catback in system scope':f.desc}</div>
+      </div>
+      <div class="oright">
+        <span class="${f.dot||''}" style="display:inline-block;width:14px;height:14px;border-radius:50%;flex-shrink:0;opacity:${disabled?0.25:1};${!f.dot?'border:1px solid var(--b3)':''}"></span>
+        <div class="odelta" style="opacity:${disabled?0.3:1}">${f.delta>0?'+'+fmt(f.delta):'Included'}</div>
+        <div class="ochk"></div>
+      </div>
+    </div>`;
+  }).join('');
+
+  const noCeramicComponents = !scopeHasCatback && !scopeHasHeaders && !scopeHasCats;
+
+  return `
+    ${sigNote}
+    ${!noCeramicComponents ? `<span class="sec-label">Ceramic Coating</span>
+    <div class="olist" style="margin-top:1rem">${ceramicRows2}</div>
+    ${ceramicColor2}` : ''}
+    <span class="sub-label">Surface Finish</span>
+    ${anyCeramicOn2 ? '<div class="tips-note" style="margin-bottom:.75rem"><div class="tips-note-body">Surface finish options are not available when ceramic coating is selected — the ceramic is the finish. Deselect ceramic above to access polished or anodized gold options.</div></div>' : ''}
+    <div class="olist">${ssRows2}</div>
+    <div class="nav">
+      <button class="btn-back" onclick="setStep(2)">← Back</button>
+      <button class="btn-next" onclick="setStep(4)">Continue</button>
+    </div>`;
+}
+
+// ── TIPS ──────────────────────────────────────────────────────────────────────
+function rTips() {
+  const rows = TIPS.map(t => `
+    <div class="orow ${S.tips===t.id?'selected':''}" data-key="tips" data-val="${t.id}">
+      <div class="oleft"><div class="oname">${t.name}</div><div class="odesc">${t.desc}</div></div>
+      <div class="oright"><div class="odelta">Included</div><div class="ochk"></div></div>
+    </div>`).join('');
+
+  return `
+    <span class="sec-label">Exit tips</span>
+    <div class="olist" style="margin-top:1rem">${rows}</div>
+    <div class="tips-note">
+      <div class="tips-note-title">How tip selection works</div>
+      <div class="tips-note-body">If you choose Customized Tips, we will send you a dedicated page after your deposit is received — showing our full tip catalogue with all options, dimensions, and finishes. You select from there before fabrication begins. No guesswork at this stage.</div>
+    </div>
+    <div class="nav">
+      <button class="btn-back" onclick="setStep(3)">← Back</button>
+      <button class="btn-next" onclick="setStep(5)">Review build</button>
+    </div>`;
+}
+
+// ── REVIEW ────────────────────────────────────────────────────────────────────
+function rReview() {
+  const g  = pg();
+  const isTi = S.material === 'ti';
+  const mat  = isTi ? 'Titanium' : 'T304 Stainless Steel';
+  const finList = isTi ? FINISHES_TI : FINISHES_SS;
+  const fin  = finList.find(x=>x.id===S.finish);
+  const tip  = TIPS.find(x=>x.id===S.tips);
+  const base = isTi ? (g?(g.ti!=null?g.ti:g.ss):0) : (g?g.ss:0);
+  const rows = [];
+  rows.push({n:'Base system — '+mat, v:fmt(base), savings:false});
+
+  // Scope label
+  if (g) {
+    const arch = g.arch;
+    const scopeLabels = {
+      catback:'Cat-Back System', h_cb:'Headers + Cats (with Cat-Back)', h_only:'Headers + Cats (standalone)',
+      headers:'Headers Only', cb_headers:'Headers + Catback'
+    };
+    if (arch === 'C') {
+      const parts=[];
+      if (S.cHasCatback) parts.push('Catback');
+      if (S.cHasHeaders) parts.push('Headers');
+      if (S.cHasCats)    parts.push('Catalytic Converters');
+      rows.push({n:'Scope — '+parts.join(' + '), v:'See total', savings:false});
+    } else {
+      const sl = scopeLabels[S.systemType] || S.systemType;
+      rows.push({n:'Scope — '+sl, v:'See total', savings:false});
+    }
+  }
+
+  // Cat option
+  const catHighFlow = S.catOption !== 'catless';
+  const catNames = {catless:'Catless',cat100:'100-Cell High-Flow',cat200:'200-Cell High-Flow',cat300:'300-Cell High-Flow',cat400:'400-Cell Sport Cats'};
+  if (g) {
+    const catAdder = g.arch === 'C' ? (g.catHighFlowAdder||0) : (g.catAdder||0);
+    const showCat = (g.arch==='A' && (S.systemType==='h_cb'||S.systemType==='h_only')) ||
+                    (g.arch==='B' && (S.systemType==='catback'||S.systemType==='cb_headers')) ||
+                    (g.arch==='C' && S.cHasCats);
+    if (showCat) {
+      rows.push({n:'Catalytic Converters — '+(catNames[S.catOption]||S.catOption), v: catHighFlow&&catAdder ? '+'+fmt(catAdder) : 'Included', savings:false});
+    }
+  }
+
+  // Valve
+  if (S.valve==='fixed') rows.push({n:'Fixed System (opt-out of Active Valve)', v:'−$200', savings:true});
+  else rows.push({n:'Active Valve System', v:'Included (Signature)', savings:false});
+  // Ceramic
+  if (!isTi) {
+    const colorLabel = S.ceramicColor.charAt(0).toUpperCase()+S.ceramicColor.slice(1);
+    const ceramicParts = [];
+    if (S.ceramicCatback) ceramicParts.push('Catback');
+    if (S.ceramicHeaders) ceramicParts.push('Headers');
+    if (S.ceramicCats)    ceramicParts.push('Cats');
+    if (ceramicParts.length > 0) {
+      rows.push({n:'Ceramic Coating — '+ceramicParts.join(', ')+' ('+colorLabel+')', v:'Included', savings:false});
+    } else {
+      rows.push({n:'No Ceramic Coating', v:'−'+fmt(1200)+' (opt-out)', savings:true});
+    }
+  }
+  // Finish delta
+  const finishes = isTi?FINISHES_TI:FINISHES_SS;
+  const finO = finishes.find(x=>x.id===S.finish);
+  if (finO&&finO.delta) rows.push({n:finO.name, v:'+'+fmt(finO.delta), savings:false});
+  rows.push({n:tip?tip.name:'Tips', v:'Included', savings:false});
+
+  const rowsHTML = rows.map(r=>`<div class="srow"><span class="srn">${r.n}</span><span class="srv" style="${r.savings?'color:#C06050':''}">${r.v}</span></div>`).join('');
+
+  return `
+    <div class="sblock">
+      <div class="shdr">
+        <div class="seyebrow">Your configuration</div>
+        <div class="smodel">${fullLabel()} — ${mat}</div>
+      </div>
+      ${rowsHTML}
+      <div class="stotal">
+        <span class="stl">Total investment</span>
+        <span class="stp">${fmt(totalPrice())}</span>
+      </div>
+    </div>
+    <div class="cta-area">
+      <button class="cta-btn" onclick="setStep(6)">Begin Commission</button>
+      <p class="cta-note">Each system is built to order. Specifications are reviewed and confirmed with you before fabrication begins.</p>
+    </div>
+    <div class="nav" style="margin-top:1rem">
+      <button class="btn-back" onclick="setStep(4)">← Modify build</button><span></span>
+    </div>`;
+}
+
+// ── DETAILS ───────────────────────────────────────────────────────────────────
+function rDetails() {
+  const isTi = S.material==='ti';
+  const fin = (isTi?FINISHES_TI:FINISHES_SS).find(x=>x.id===S.finish);
+  const sys = SYSTEM_TYPES.find(x=>x.id===S.systemType);
+  return `
+    <div class="bsi">
+      <div class="bsi-ey">Build summary</div>
+      <div class="bsi-m">${fullLabel()}</div>
+      <div class="bsi-s">${S.material==='ti'?'Titanium':'Stainless Steel'} · ${sys?sys.name:''} · ${S.material==='ss'?(()=>{const p=[];if(S.ceramicCatback)p.push('Catback Ceramic');if(S.ceramicHeaders)p.push('Headers Ceramic');if(S.ceramicCats)p.push('Cats Ceramic');return p.length?p.join(', '):'No Ceramic';})():(fin?fin.name:'')} · ${S.valve==='active'?'Active Valve':'Fixed System'}</div>
+      <div class="bsi-p">${fmt(totalPrice())}</div>
+    </div>
+    <span class="sec-label">Commission details</span>
+    <div class="frow" style="margin-top:1rem">
+      <div class="ifield"><label>Vehicle year</label><input id="f-year" type="text" placeholder="e.g. 2022" value="${fd.year}"></div>
+      <div class="ifield"><label>Current exhaust</label>
+        <select id="f-exhaust">
+          <option value="" ${!fd.exhaust?'selected':''}>—</option>
+          <option value="factory" ${fd.exhaust==='factory'?'selected':''}>Factory</option>
+          <option value="aftermarket" ${fd.exhaust==='aftermarket'?'selected':''}>Aftermarket</option>
+        </select>
+      </div>
+    </div>
+    <div class="frow">
+      <div class="ifield"><label>Primary use</label>
+        <select id="f-use">
+          <option value="" ${!fd.use?'selected':''}>—</option>
+          <option value="street" ${fd.use==='street'?'selected':''}>Street</option>
+          <option value="track" ${fd.use==='track'?'selected':''}>Track</option>
+          <option value="both" ${fd.use==='both'?'selected':''}>Both</option>
+        </select>
+      </div>
+      <div class="ifield"><label>VIN (optional)</label><input id="f-vin" type="text" placeholder="Helps confirm fitment" value="${fd.vin||''}"></div>
+    </div>
+    <div class="ifield"><label>Notes</label><textarea id="f-notes" placeholder="Sound preferences, aesthetic notes, delivery details…">${fd.notes}</textarea></div>
+    <div class="form-section-label">Contact</div>
+    <div class="frow">
+      <div class="ifield"><label>Name</label><input id="f-name" type="text" placeholder="Full name" value="${fd.name}"></div>
+      <div class="ifield"><label>Email or phone</label><input id="f-contact" type="text" placeholder="How to reach you" value="${fd.contact}"></div>
+    </div>
+    <div class="nav">
+      <button class="btn-back" onclick="saveForm();setStep(5)">← Back</button>
+      <button class="btn-next" id="btnDetails" onclick="submitDetails()">Continue to deposit</button>
+    </div>`;
+}
+
+function saveForm() {
+  fd = {
+    year:    document.getElementById('f-year')   ?.value||'',
+    exhaust: document.getElementById('f-exhaust')?.value||'',
+    use:     document.getElementById('f-use')    ?.value||'',
+    vin:     document.getElementById('f-vin')    ?.value||'',
+    notes:   document.getElementById('f-notes')  ?.value||'',
+    name:    document.getElementById('f-name')   ?.value||'',
+    contact: document.getElementById('f-contact')?.value||'',
+  };
+}
+
+function submitDetails() {
+  saveForm();
+  if (!fd.name||!fd.contact) {
+    const b=document.getElementById('btnDetails');
+    b.textContent='Name & contact required'; b.style.borderColor='#7a3a2a'; b.style.color='#7a3a2a';
+    setTimeout(()=>{b.textContent='Continue to deposit';b.style.borderColor='';b.style.color='';},2200);
+    return;
+  }
+  setStep(7);
+}
+
+// ── DEPOSIT ───────────────────────────────────────────────────────────────────
+function rDeposit() {
+  const t=totalPrice(), bal=t-DEPOSIT;
+  return `
+    <div class="deposit-block">
+      <div class="deposit-top">
+        <div class="deposit-eyebrow">Build slot reservation</div>
+        <div class="deposit-title">Secure your commission.</div>
+        <div class="deposit-desc">A deposit of ${fmt(DEPOSIT)} reserves your production slot and initiates the specification review. Your balance is due after the confirmation call — before fabrication begins.</div>
+      </div>
+      <div class="deposit-amounts">
+        <div class="dep-cell">
+          <div class="dep-cell-label">Due today</div>
+          <div class="dep-cell-value">${fmt(DEPOSIT)}</div>
+          <div class="dep-cell-sub">Build slot reservation</div>
+        </div>
+        <div class="dep-cell">
+          <div class="dep-cell-label">Balance at confirmation</div>
+          <div class="dep-cell-value" style="font-size:22px;color:var(--t2)">${fmt(bal)}</div>
+          <div class="dep-cell-sub">Due before fabrication</div>
+        </div>
+      </div>
+    </div>
+    <div class="payment-form">
+      <div class="payment-eyebrow">Payment details</div>
+      <div class="card-field"><label>Cardholder name</label><input class="card-input" id="p-name" type="text" placeholder="Name on card" value="${fd.name}"></div>
+      <div class="card-field"><label>Card number</label><input class="card-input" id="p-card" type="text" placeholder="•••• •••• •••• ••••" maxlength="19"></div>
+      <div class="card-row">
+        <div class="card-field"><label>Expiry</label><input class="card-input" id="p-exp" type="text" placeholder="MM / YY" maxlength="7"></div>
+        <div class="card-field"><label>CVC</label><input class="card-input" id="p-cvc" type="text" placeholder="•••" maxlength="4"></div>
+      </div>
+      <div class="secure-note">Payments processed securely via Stripe. GAMARAY does not store card details.</div>
+    </div>
+    <div class="nav">
+      <button class="btn-back" onclick="setStep(6)">← Back</button>
+      <button class="btn-next" id="btnPay" onclick="submitDeposit()">Reserve slot — ${fmt(DEPOSIT)}</button>
+    </div>`;
+}
+
+function submitDeposit() {
+  const card=document.getElementById('p-card')?.value.replace(/\s/g,'')||'';
+  const exp= document.getElementById('p-exp') ?.value||'';
+  const cvc= document.getElementById('p-cvc') ?.value||'';
+  if (card.length<15||!exp||cvc.length<3) {
+    const b=document.getElementById('btnPay');
+    b.textContent='Check card details'; b.style.borderColor='#7a3a2a'; b.style.color='#7a3a2a';
+    setTimeout(()=>{b.textContent='Reserve slot — '+fmt(DEPOSIT);b.style.borderColor='';b.style.color='';},2200);
+    return;
+  }
+  setStep(8);
+}
+
+// ── CONFIRM ───────────────────────────────────────────────────────────────────
+function rConfirm() {
+  const ref='GR-'+Math.floor(10000+Math.random()*90000);
+  const bal=totalPrice()-DEPOSIT;
+  return `
+    <div class="confirm-screen">
+      <div class="confirm-mark"></div>
+      <div class="confirm-title">Build slot reserved.</div>
+      <div class="confirm-sub">Your ${fullLabel()} commission is confirmed. ${fmt(DEPOSIT)} has been charged. A GAMARAY specialist will contact you within 24 hours to schedule your specification review and confirm the build timeline. If you selected Customized Tips, your tip selection page will be sent alongside.</div>
+      <div class="confirm-ref">Reference — ${ref}</div>
+      <div class="confirm-balance">Balance of ${fmt(bal)} due at build confirmation</div>
+      <button class="btn-next" onclick="reset()">Configure another build</button>
+    </div>`;
+}
+
+// ── BESPOKE ───────────────────────────────────────────────────────────────────
+function rBespoke() {
+  const pills=['Ferrari 458','Ferrari Portofino','Ferrari SF90','Lamborghini Revuelto','Lamborghini Urus','BMW M4','BMW M8','Mercedes AMG GT','Mercedes G63'].map(b=>
+    `<div class="bp ${S.brand===b?'selected':''}" data-brand="${b}">${b}</div>`).join('');
+  return `
+    <span class="sec-label">Bespoke Applications</span>
+    <div class="sec-heading" style="margin-bottom:1rem">Select commissions<br>undertaken individually.</div>
+    <p class="body">Each bespoke application is approached as an individual engineering study — fitment, acoustic profiling, and client approval precede fabrication.</p>
+    <div class="brand-pills">${pills}</div>
+    <span class="sec-label">Inquiry</span>
+    <div class="ifield" style="margin-top:1rem"><label>Vehicle year & variant</label><input id="b-vehicle" type="text" placeholder="e.g. 2023 Ferrari 458 Speciale"></div>
+    <div class="ifield"><label>What you are looking for</label><textarea id="b-notes" placeholder="Sound character, system type, material preference, timeline…" style="min-height:100px"></textarea></div>
+    <div class="frow">
+      <div class="ifield"><label>Name</label><input id="b-name" type="text" placeholder="Full name"></div>
+      <div class="ifield"><label>Email or phone</label><input id="b-contact" type="text" placeholder="How to reach you"></div>
+    </div>
+    <div class="nav">
+      <button class="btn-back" onclick="exitBespoke()">← Back</button>
+      <button class="btn-next" id="btnB" onclick="submitBespoke()">Submit inquiry</button>
+    </div>`;
+}
+
+function rBespokeConfirm() {
+  const ref='GR-B-'+Math.floor(10000+Math.random()*90000);
+  return `
+    <div class="confirm-screen">
+      <div class="confirm-mark"></div>
+      <div class="confirm-title">Inquiry received.</div>
+      <div class="confirm-sub">Your bespoke application has been submitted. Inquiries are reviewed personally — expect a response within 72 hours.</div>
+      <div class="confirm-ref">Reference — ${ref}</div>
+      <div style="margin-top:2rem"><button class="btn-next" onclick="reset()">Return to configurator</button></div>
+    </div>`;
+}
+
+function submitBespoke() {
+  const n=document.getElementById('b-name')?.value||'';
+  const c=document.getElementById('b-contact')?.value||'';
+  if (!n||!c) {
+    const b=document.getElementById('btnB');
+    b.textContent='Name & contact required'; b.style.borderColor='#7a3a2a'; b.style.color='#7a3a2a';
+    setTimeout(()=>{b.textContent='Submit inquiry';b.style.borderColor='';b.style.color='';},2200);
+    return;
+  }
+  S.step=99; renderRail(); updatePrice(); renderContent();
+}
+
+function exitBespoke() { S.bespoke=false; S.step=0; S.platformStep='series'; renderRail(); updatePrice(); renderContent(); }
+
+function reset() {
+  S={step:0,platformStep:'series',series:null,generation:null,variant:null,
+     material:'ss',systemType:'catback',
+     cHasCatback:true,cHasHeaders:false,cHasCats:false,
+     catOption:'catless',
+     ceramicCatback:true,ceramicHeaders:true,ceramicCats:false,
+     ceramicColor:'bronze',finish:'ss_polished',
+     valve:'active',tips:'standard',bespoke:false,brand:null};
+  fd={year:'',gen:'',exhaust:'',use:'',vin:'',notes:'',name:'',contact:''};
+  renderRail(); updatePrice(); renderContent();
+}
+
+// ── BIND ──────────────────────────────────────────────────────────────────────
+function bind() {
+  document.querySelectorAll('[data-series]').forEach(el=>el.addEventListener('click',()=>{
+    S.series=el.dataset.series; S.generation=null; S.variant=null;
+    S.platformStep='generation'; updatePrice(); renderContent();
+  }));
+  // Auto-select series if only one exists
+  const seriesCards = document.querySelectorAll('[data-series]');
+  if (seriesCards.length === 1 && !S.series) {
+    seriesCards[0].click();
+  }
+  document.querySelectorAll('[data-gen]').forEach(el=>el.addEventListener('click',()=>{
+    S.generation=PLATFORM[S.series].generations.find(g=>g.id===el.dataset.gen)||null;
+    S.variant=null;
+    document.querySelectorAll('[data-gen]').forEach(x=>x.classList.remove('selected'));
+    el.classList.add('selected');
+    const b=document.getElementById('btnGen'); if(b) b.disabled=false;
+    updatePrice();
+  }));
+  document.querySelectorAll('[data-variant]').forEach(el=>el.addEventListener('click',()=>{
+    S.variant=S.generation.variants.find(v=>v.id===el.dataset.variant)||null;
+    document.querySelectorAll('[data-variant]').forEach(x=>x.classList.remove('selected'));
+    el.classList.add('selected');
+    const b=document.getElementById('btnVariant'); if(b) b.disabled=false;
+    updatePrice();
+  }));
+  document.querySelectorAll('[data-key][data-val]').forEach(el=>el.addEventListener('click',()=>{
+    const k=el.dataset.key, v=el.dataset.val;
+    // Boolean ceramic toggles
+    if (['ceramicCatback','ceramicHeaders','ceramicCats'].includes(k)) {
+      S[k] = !S[k];
+      renderContent(); updatePrice(); return;
+    }
+    // Architecture C independent scope toggles
+    if (['cHasCatback','cHasHeaders','cHasCats'].includes(k)) {
+      S[k] = !S[k];
+      autoSetCeramic();
+      if (!S.cHasCatback && !S.cHasHeaders && !S.cHasCats) S.cHasCatback = true; // prevent empty
+      renderContent(); updatePrice(); return;
+    }
+    if (k==='headerCeramic') S[k]=(v==='true');
+    else S[k]=v;
+    // Material change: reset finish defaults
+    if (k==='material') {
+      S.finish = v==='ti' ? 'ti_polished' : 'ss_polished';
+      S.ceramicColor = 'bronze';
+      S.ceramicCatback = true; S.ceramicHeaders = true; S.ceramicCats = false;
+    }
+    // System scope change: auto-set ceramic defaults and reset cat
+    if (k==='systemType') {
+      S.catOption = 'catless';
+      autoSetCeramic();
+    }
+    // Re-render on these keys to update dependent UI
+    const reRenderKeys = ['systemType','finish','ceramicColor','material','catOption'];
+    if (reRenderKeys.includes(k)) { renderContent(); updatePrice(); return; }
+    document.querySelectorAll(`[data-key="${k}"]`).forEach(x=>x.classList.remove('selected'));
+    el.classList.add('selected');
+    updatePrice();
+  }));
+  document.querySelectorAll('[data-brand]').forEach(el=>el.addEventListener('click',()=>{
+    S.brand=el.dataset.brand;
+    document.querySelectorAll('[data-brand]').forEach(x=>x.classList.remove('selected'));
+    el.classList.add('selected');
+  }));
+  const bt=document.getElementById('bespoke-trigger');
+  if (bt) bt.addEventListener('click',()=>{ S.bespoke=true; renderRail(); updatePrice(); renderContent(); });
+  const ci=document.getElementById('p-card');
+  if (ci) ci.addEventListener('input',e=>{ let v=e.target.value.replace(/\D/g,'').substring(0,16); e.target.value=v.replace(/(.{4})/g,'$1 ').trim(); });
+  const ei=document.getElementById('p-exp');
+  if (ei) ei.addEventListener('input',e=>{ let v=e.target.value.replace(/\D/g,'').substring(0,4); if(v.length>2)v=v.substring(0,2)+' / '+v.substring(2); e.target.value=v; });
+}
+
+function reportHeight() {
+  window.parent.postMessage({ type: 'gmr-config-height', height: document.body.scrollHeight }, '*');
+}
+
+const _origRenderContent = renderContent;
+renderContent = function() { _origRenderContent(); setTimeout(reportHeight, 60); };
+
+renderRail(); renderContent(); updatePrice();
+</script>
+</body>
+</html>

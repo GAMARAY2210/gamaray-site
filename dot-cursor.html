@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GAMARAY · Dot Cursor</title>
+<style>
+
+/* ── PASTE THIS IN YOUR <head> ── */
+
+* { cursor: none; }
+@media (pointer: coarse) { * { cursor: auto; } #gmr-cursor { display: none; } }
+
+#gmr-cursor {
+  position: fixed;
+  pointer-events: none;
+  z-index: 9999;
+  width: 8px;
+  height: 8px;
+  background: #C8A86A;
+  border-radius: 50%;
+  top: 0;
+  left: 0;
+  transition: background .15s, opacity .25s;
+  will-change: transform;
+}
+#gmr-cursor.expanded { background: transparent; }
+#gmr-cursor::after {
+  content: '';
+  position: absolute;
+  inset: -18px;
+  border-radius: 50%;
+  border: 1px solid #C8A86A;
+  opacity: 0;
+  transform: scale(0.6);
+  transition: opacity .2s, transform .2s;
+  pointer-events: none;
+}
+#gmr-cursor.expanded::after {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* ── Demo page styles (not part of cursor — delete these) ── */
+body {
+  background: #0A0A08;
+  color: #F0EDE8;
+  font-family: 'Montserrat', sans-serif;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  text-align: center;
+}
+p { font-size: 13px; letter-spacing: .08em; color: #787470; }
+a, button {
+  display: inline-block;
+  padding: .75rem 2rem;
+  border: 1px solid #C8A86A;
+  color: #C8A86A;
+  font-size: 11px;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  text-decoration: none;
+  background: none;
+  font-family: inherit;
+  margin: .5rem;
+}
+</style>
+</head>
+<body>
+
+<!-- ── PASTE THIS RIGHT AFTER <body> OPENS ── -->
+<div id="gmr-cursor"></div>
+
+<!-- Demo content -->
+<p>Move your mouse. Hover over the button or link to see the ring expand.</p>
+<button>Hover Me</button>
+<a href="#">Or This Link</a>
+
+<!-- ── PASTE THIS RIGHT BEFORE </body> CLOSES ── -->
+<script>
+(function() {
+  var cursor = document.getElementById('gmr-cursor');
+  if (!cursor || window.matchMedia('(pointer: coarse)').matches) return;
+  document.addEventListener('mousemove', function(e) {
+    cursor.style.transform = 'translate(' + e.clientX + 'px, ' + e.clientY + 'px) translate(-50%, -50%)';
+  }, { passive: true });
+  document.addEventListener('mouseleave', function() { cursor.style.opacity = '0'; });
+  document.addEventListener('mouseenter', function() { cursor.style.opacity = '1'; });
+  document.addEventListener('mouseover', function(e) {
+    if (e.target.matches('a, button')) cursor.classList.add('expanded');
+  });
+  document.addEventListener('mouseout', function(e) {
+    if (e.target.matches('a, button')) cursor.classList.remove('expanded');
+  });
+})();
+</script>
+
+</body>
+</html>
